@@ -5,3 +5,8 @@
 .wy-side-nav-search .wy-dropdown > a img.logo, .wy-side-nav-search > a img.logo {
     width: 120px;
 }
+
+h1 { font-size: 150%; }
+h2 { font-size: 125%; }
+h3 { font-size: 115%; }
+h4 { font-size: 100%; }
