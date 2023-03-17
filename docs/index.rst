@@ -12,5 +12,6 @@ User Guide
    access
    jobs
    help
+   disclaimer
 
 
