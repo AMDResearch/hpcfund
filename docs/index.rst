@@ -5,7 +5,7 @@ User Guide
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: HPC Fund Research Cloud
 
    introduction
    hardware
