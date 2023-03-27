@@ -25,7 +25,7 @@ A summary of the available file systems and their characteristics is provided in
 
 | File System | Quota/Size | Type | Backups | Features |
 | ----: | :--------: | :--: | :--: | --- |
-|`$HOME` | 25GB | WekaFS | No |  Permanent storage accessible across the cluster.  Intended for housing source code, job scripts, smaller application inputs/outputs.|
+|`$HOME` | 25GB | WekaFS | Yes (daily) |  Permanent storage accessible across the cluster.  Intended for housing source code, job scripts, smaller application inputs/outputs. Nightly snapshots are generated and retained for a maximum of **10 days**.|
 | `$WORK` | 2TB (shared)  | WekaFS | No | Permanent storage accessible across the cluster.  Intended to provide storage for larger datasets and shared resources across a project team. Note that the storage quota is shared amongst all members of a particular project.|
 | `$TMPDIR` | 100GB| XFS | No | Temporary storage that is unique to each assigned host during a user job.  |
 
