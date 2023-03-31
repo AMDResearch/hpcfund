@@ -31,7 +31,7 @@ Example SLURM batch job submission scripts are available on the login node at `/
 prun ./a.out
 ```
 
-Note that the `prun` utility included in the above job script is a wrapper script for launching MPI-based executables. In this example, 8 MPI tasks will be launched on two physical nodes, or 4 MPI tasks per node. This is a fairly common use case for the `mi1004x` partition where 1 MPI task is allocated per GPU accelerator.
+The `prun` utility included in the above job script is a wrapper script for launching MPI-based executables. To submit this batch job, issue the command: `sbatch job.mpi`.  Note that in this example, 8 MPI tasks will be launched on two physical nodes resulting in 4 MPI tasks per node. This is a fairly common use case for the `mi1004x` partition where 1 MPI task is allocated per GPU accelerator.
 
 ```{tip}
 SLURM batch submission scripts are just shell scrips - you can customize the script to perform various pre and post-processing tasks in addition to launching parallel jobs.
@@ -82,7 +82,7 @@ HPC Fund compute nodes are allocated in an **exclusive** fashion such that only 
 [test@t004-003 ~]$
 ```
 
-## Command SLURM commands:
+## Common SLURM commands:
 
 The table below highlights several of the more common user-facing SLURM commands. Consult the man pages (e.g. `man sbatch`) for more detailed information and command-line options for these utilities.
 
@@ -93,6 +93,7 @@ The table below highlights several of the more common user-facing SLURM commands
 | salloc  | allocate resources in real time (e.g. to request an interactive job) |
 | sinfo   | report the state of partitions and nodes |
 | squeue  | report the state of queue jobs |
+| scontrol | view or modify a job configuration |
 
 ## Job dependencies
 
