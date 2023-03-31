@@ -11,7 +11,6 @@ User Guide
    hardware
    access
    jobs
+   software
    help
    disclaimer
-
-
