@@ -12,7 +12,9 @@ Multiple shared file systems are available across the cluster.  These are provis
 
 Each user has access to two primary storage locations: `$HOME` and `$WORK`. These are unique directories per user with quotas applied to prevent over-allocation of the file system. Upon login, the `$HOME` and `$WORK` environment variables will be set automatically to the correct paths and user's are encouraged to leverage these variables within their job scripts for convenience.  
 
-* todo: insert system architecture diagram
+<!---
+## insert system architecture diagram (TODO)
+-->
 
 ```{tip}
 In addition to the standard `cd` command, a `cdw` convenience alias is provided in the default [BASH](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html) environment which can be issued to take a user directly to their work directory.
