@@ -10,7 +10,7 @@ Multiple partitions (or queues) are available for users to choose from and each 
 | `mi1004x` | 24 hours |     16      |        1X         |       4 x MI100 accelerators per node.       |
 | `mi1008x` | 24 hours |      4      |       1.5X        |       8 x MI100 accelerators per node.       |
 
-Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis.q
+Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis.
 
 ## Batch job submission
 
@@ -34,7 +34,7 @@ prun ./a.out
 The `prun` utility included in the above job script is a wrapper script for launching MPI-based executables. To submit this batch job, issue the command: `sbatch job.mpi`.  Note that in this example, 8 MPI tasks will be launched on two physical nodes resulting in 4 MPI tasks per node. This is a fairly common use case for the `mi1004x` partition where 1 MPI task is allocated per GPU accelerator.
 
 ```{tip}
-SLURM batch submission scripts are just shell scrips - you can customize the script to perform various pre and post-processing tasks in addition to launching parallel jobs.
+SLURM batch submission scripts are just shell scripts - you can customize the script to perform various pre and post-processing tasks in addition to launching parallel jobs.
 ```
 
 ## Interactive usage
