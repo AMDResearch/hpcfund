@@ -4,7 +4,7 @@ The HPC Fund Research Cloud consists of 40 high performance computing (HPC) serv
 
 ## Compute servers
 
-Each compute server consists of two [AMD EPYC](https://www.amd.com/en/processors/epyc-server-cpu-family) 7V13 64-core processors (Milan) with access to 512 GB of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes multiple [AMD MI100](https://www.amd.com/en/products/server-accelerators/instinct-mi100) GPU accelerators (in either 4 or 8 GPU/node configurations). Each individual accelerator has 32GB of high bandwidth memory (HBM) and a peak double-precision (FP64) performance of 11.5 TFLOPS interconnected via PCI Express.
+Each compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/processors/epyc-server-cpu-family) 7V13 64-core processors with access to 512 GB of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes multiple [AMD MI100](https://www.amd.com/en/products/server-accelerators/instinct-mi100) GPU accelerators (in either 4 or 8 GPU/node configurations). Each individual accelerator has 32GB of high bandwidth memory (HBM) and a peak double-precision (FP64) performance of 11.5 TFLOPS interconnected via PCI Express.
 
 ## File systems
 
