@@ -26,4 +26,4 @@ Cluster login node(s) are shared among all users and are provided as an external
 
 **Do Not Run Jobs on the Login Nodes**
 
-Do not run long-running applications or perform intensive computational activity on the login nodes. Your account may be suspended and you will lose access to the queues if you do not adhere to this policy and your are actions are impacting other users.  Instead, submit long running batch jobs to SLURM or grab an interactive session on a compute node for dedicated resources (see {doc}`jobs` for more info).
+Do not run long-running applications or perform intensive computational activity on the login nodes. Your account may be suspended and you will lose access to the queues if you do not adhere to this policy and your actions are impacting other users.  Instead, submit long running batch jobs to SLURM or obtain an interactive session on a compute node for dedicated resources (see {doc}`jobs` for more info).
