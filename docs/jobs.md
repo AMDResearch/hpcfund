@@ -82,7 +82,7 @@ HPC Fund compute nodes are allocated in an **exclusive** fashion such that only 
 [test@t004-003 ~]$
 ```
 
-## Common SLURM commands:
+## Common SLURM commands
 
 The table below highlights several of the more common user-facing SLURM commands. Consult the man pages (e.g. `man sbatch`) for more detailed information and command-line options for these utilities.
 
@@ -95,6 +95,6 @@ The table below highlights several of the more common user-facing SLURM commands
 | squeue  | report the state of queue jobs |
 | scontrol | view or modify a job configuration |
 
-## Job dependencies
-
-TODO
+<!---
+## Job dependencies (TODO)
+-->
