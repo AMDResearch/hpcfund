@@ -24,7 +24,7 @@ The Lmod system provides a flexible mechanism to manage your local software envi
 | module load \<package\> | load a new module named \<package\> |
 | module unload \<package\> | unload the module named \<package\> |
 | module load hpcfund   | restore default login environment (typically used after `module purge`) |
-| module show <\package/> | show the variables set by a particular modulefile |
+| module show \<package\> | show the variables set by a particular modulefile |
 
 ```{tip}
 The `module help` command can also be run locally on the system to get more information on available Lmod options and sub-commands.
