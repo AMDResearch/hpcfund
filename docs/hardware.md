@@ -2,11 +2,11 @@
 
 The HPC Fund Research Cloud consists of 40 high performance computing (HPC) servers attached to a unifying high-speed InfiniBand fabric supporting high-bandwidth, low-latency message passing for distributed-memory applications.  Each servers consists of dual-socket CPUs combined with multiple AMD Instinct MI series [accelerators](https://www.amd.com/en/graphics/instinct-server-accelerators).  The supporting operating system is [Rocky Linux](https://rockylinux.org). Additional details regarding the hardware configuration is summarized below.
 
-## Servers
+## Compute servers
 
 Each compute server consists of two [AMD EPYC](https://www.amd.com/en/processors/epyc-server-cpu-family) 7V13 64-core processors (Milan) with access to 512 GB of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes multiple [AMD MI100](https://www.amd.com/en/products/server-accelerators/instinct-mi100) GPU accelerators (in either 4 or 8 GPU/node configurations). Each individual accelerator has 32GB of high bandwidth memory (HBM) and a peak double-precision (FP64) performance of 11.5 TFLOPS interconnected via PCI Express.
 
-## File Systems
+## File systems
 
 Multiple shared file systems are available across the cluster.  These are provisioned by separate dedicated servers that aggregate a number of NVMe storage devices running the [WekaFS](https://docs.weka.io) software stack in order to provide a POSIX-compliant file system.
 
