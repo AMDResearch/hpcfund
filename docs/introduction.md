@@ -19,3 +19,6 @@ for an allocation for usage on the HPC Fund Research
 Cloud. Allocations are typically granted for 1-year intervals and
 provide access to remote AMD hardware technologies in a collaborative research environment.
 
+## Terms of Use
+
+System usage is governed by the [AMD HPC Fund Terms of Use](https://www.amd.com/system/files/documents/hpc-fund-terms-of-use.pdf).
