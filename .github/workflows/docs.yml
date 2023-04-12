@@ -25,7 +25,7 @@ jobs:
        image: sphinxdoc/sphinx
 
     steps:
-      - name: Checkout
+      - name: Checkout latest
         uses: actions/checkout@v3
       - name: Additional python packages
         run: pip3 install myst_parser sphinx_rtd_theme
