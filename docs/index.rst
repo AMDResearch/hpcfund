@@ -3,9 +3,9 @@
 User Guide
 ===========
 
-Welcome to the User Guide for the AMD HPC Fund Research Cloud.  Use
-the navigation panel on the left to access specific sections of the
-guide. To stay up to date with system changes and upcoming maintenance
+Welcome to the User Guide for the AMD HPC Fund Research Cloud.  Please use
+the navigation panel on the left to access specific sections of interest.
+To stay up to date with system changes and upcoming maintenance
 windows, please follow the `Announcements
 <https://github.com/AMDResearch/hpcfund/discussions/categories/announcements>`_
 discussion category on the companion HPC Fund `GitHub site
