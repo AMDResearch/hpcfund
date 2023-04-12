@@ -59,6 +59,8 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_logo = "images/amd-header-logo.svg"
 html_theme_options = {
+    "analytics_id": "G-W441NL02TT",
+    "analytics_anonymize_ip": False,    
     'logo_only': True,
     'display_version': False,
     }
