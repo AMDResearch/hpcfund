@@ -3,8 +3,11 @@
 User Guide
 ===========
 
-Welcome to the User Guide for the AMD HPC Fund Research Cloud.  Please use
+Welcome to the User Guide for the AMD HPC Fund Research Cloud.  This guide is intended to provide
+users information on the overall hardware configuration, access details, and
+general system usage. Please use
 the navigation panel on the left to access specific sections of interest.
+
 To stay up to date with system changes and upcoming maintenance
 windows, please follow the `Announcements
 <https://github.com/AMDResearch/hpcfund/discussions/categories/announcements>`_

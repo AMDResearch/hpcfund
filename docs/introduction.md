@@ -1,8 +1,4 @@
-# Overview
-
-Welcome to the HPC Fund Research Cloud User Guide. This guide is intended to provide
-users information on the overall hardware configuration, access details, and
-general system usage.
+# Project Overview
 
 ## Background
 
