@@ -41,7 +41,7 @@ source_suffix = {
     ".md": "markdown",
 }
 
-
+html_show_sphinx = False
 
 
 # List of patterns, relative to source directory, that match files and
