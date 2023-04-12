@@ -67,4 +67,3 @@ html_css_files = [
     'css/custom.css',
 ]
 
-# Just a test comment
