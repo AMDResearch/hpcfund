@@ -6,6 +6,7 @@ Multiple partitions (or queues) are available for users to choose from and each 
 
 
 ```{table} Table 1: Available SLURM queues
+:name: table-queues
 | Queue     | Max Time | Max Node(s) | Charge Multiplier |                Configuration                 |
 | --------- | :------: | :---------: | :---------------: | :------------------------------------------: |
 | `devel`   | 30 min.  |      1      |        1X         | Targeting short development needs (4xMI100). |
@@ -87,7 +88,7 @@ HPC Fund compute nodes are allocated in an **exclusive** fashion such that only 
 
 ## Aggregating tasks using job steps
 
-As mentioned above, the HPC Fund compute nodes are allocated for **exclusive** usage - i.e. they are not shared amongst multiple jobs or users. Consequently, accounting charges are accrued at the node-hour level with charge multipliers highlighted in [Table 1](jobs.html#id1).  To maximize efficiency of the consumed node hours, users are encouraged to take advantage of multiple GPU resources per node whenever possible.
+As mentioned above, the HPC Fund compute nodes are allocated for **exclusive** usage - i.e. they are not shared amongst multiple jobs or users. Consequently, accounting charges are accrued at the node-hour level with charge multipliers highlighted in [Table 1](#table-queues).  To maximize efficiency of the consumed node hours, users are encouraged to take advantage of multiple GPU resources per node whenever possible.
 
 If your application is only configured for single GPU acceleration, you can still take advantage of multiple GPUs by aggregating several independent tasks together to run in a single SLURM job. There are a variety of ways to do this, but we highlight an example below using job steps. In this case, the assumption is that a user has four independent, single-GPU tasks they would like to run simultaneously on a single node in order to take advantage of all GPU resources available.  An example job script named `job.launcher` demonstrating this approach is available on the system at `/opt/ohpc/pub/examples/slurm`. An example copy is shown below which requests four tasks on a compute node. Note the use of the `HIP_VISIBLE_DEVICES` environment variable to map each task to a unique GPU device.
 
