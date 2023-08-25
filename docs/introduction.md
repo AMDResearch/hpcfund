@@ -18,3 +18,11 @@ provide access to remote AMD hardware technologies in a collaborative research e
 ## Terms of Use
 
 System usage is governed by the [AMD HPC Fund Terms of Use](https://www.amd.com/system/files/documents/hpc-fund-terms-of-use.pdf).
+
+## Acknowledgement
+
+AMD encourages HPC Fund users to acknowledge AMD's support of your research in
+your presentations, papers, posters, and press releases. A brief statement such
+as the one below is recommended.
+
+> *"This work was supported in part by AMD under the [AMD HPC Fund](https://www.amd.com/en/corporate/hpc-fund) program."*
