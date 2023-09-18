@@ -30,7 +30,7 @@ The Lmod system provides a flexible mechanism to manage your local software envi
 The `module help` command can also be run locally on the system to get more information on available Lmod options and sub-commands.
 ```
 
-## Python on HPC Fund
+## Python Environment
 
 A base Python installation is available on the HPC Fund cluster which includes a handful of common packages (e.g., `numpy`, `pandas`). If additional packages are needed, users can customize their environments by installing packages with a user install, creating a Python virtual environment to install packages in, or loading a module for a specific package (e.g., `pytorch`, `tensorflow`). Examples of each method are given below.
 
@@ -74,5 +74,8 @@ For AI workloads, users are provided with `pytorch` and `tensorflow` modules tha
 $ module load pytorch
 ```
 
-Users who wish to build virtual environments on top of these AI framework modules need to make sure that 1) while creating the virtual environment, the module(s) is loaded and the `--system-site-packages` flag is used, and 2) the module(s) is also loaded while the virtual environment is activated. 
+Users who wish to build virtual environments on top of these AI framework
+modules need to make sure that 1) while creating the virtual environment, the
+desired system module is loaded and the `--system-site-packages` flag is used,
+and 2) the desired module is also loaded while the virtual environment is activated.
 
