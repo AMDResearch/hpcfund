@@ -161,6 +161,98 @@ The table below highlights several of the more common user-facing SLURM commands
 | scontrol | view or modify a job configuration |
 ```
 
+## Jupyter
+
+Users can run Jupyter Notebooks on the HPC Fund compute nodes by making a copy
+of the example batch script (available here:
+`/opt/ohpc/pub/examples/slurm/job.notebook`) and customizing it to fit their
+needs. The script can then be used by following steps 1-3 below.
+
+**Step 1:**
+
+While logged into the HPC Fund cluster, make a copy of the batch script, submit
+it to the batch system, and `cat` the contents of the newly-created
+`job.<job-id>.out` file (where `<job-id>` is the Job ID for your batch job):
+
+```
+$ cp /opt/ohpc/pub/examples/slurm/job.notebook .
+
+
+$ sbatch job.notebook
+sbatch: ---------------------------------------------------------------
+sbatch: AMD HPC Fund Job Submission Filter
+sbatch: ---------------------------------------------------------------
+sbatch: --> ok: runtime limit specified
+sbatch: --> ok: using default qos
+sbatch: --> ok: Billing account-> <project-id>/<username>
+sbatch: --> checking job limits...
+sbatch:     --> requested runlimit = 1.5 hours (ok)
+sbatch: --> checking partition restrictions...
+sbatch:     --> ok: partition = mi1004x
+Submitted batch job <job-id>
+
+
+$ cat job.<job-id>.out
+
+------
+Jupyter Notebook Setup:
+
+To access this notebook, use a separate terminal on your laptop/workstation to create
+an ssh tunnel to the login node as follows:
+
+ssh -t hpcfund.amd.com -L 7080:localhost:<port-id>
+
+Then, point your local web browser to http://localhost:7080 to access
+the running notebook.  You will need to provide the notebook token shown below.
+
+Please remember to Quit Jupyter when done, or "scancel" your job in SLURM job when
+to avoid additional accounting charges.
+-----
+[I 12:36:40.651 NotebookApp] Writing notebook server cookie secret to /home1/<username>/.local/share/jupyter/runtime/notebook_cookie_secret
+[I 12:36:40.936 NotebookApp] Serving notebooks from local directory: /home1/<username>
+[I 12:36:40.936 NotebookApp] Jupyter Notebook 6.5.5 is running at:
+[I 12:36:40.936 NotebookApp] http://localhost:8888/?token=<token-id>
+[I 12:36:40.936 NotebookApp]  or http://127.0.0.1:8888/?token=<token-id>
+[I 12:36:40.936 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 12:36:40.939 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///home1/<username>/.local/share/jupyter/runtime/nbserver-<id>-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=<token-id>
+     or http://127.0.0.1:8888/?token=<token-id>
+```
+
+By default, the batch script loads the `pytorch` module, launches a job on a
+compute node for 1.5 hours, and creates an `ssh` tunnel from the compute node
+to the login node.
+
+```{note}
+The text between the `------` lines in the `job.<job-id>.out` file is written from the batch script itself, while the rest of the text is written out from the Jupyter server. The only content needed from the Jupyter server will be the `<token-id>`, which will be used to log in in Step 3 below. The URLs pointing to `localhost:8888` can be ignored since we will be further tunneling to your local computer (i.e., laptop/desktop) in Step 2 and a different port will be used..
+```
+
+**Step 2:**
+
+In a new terminal window, issue the `ssh` command shown in Step 1 to create a tunnel between your local computer (i.e., laptop/desktop) and the login node:
+
+```
+$ ssh -t hpcfund.amd.com -L 7080:localhost:<port-id>
+```
+
+**Step 3:**
+
+On your local computer (i.e., laptop/desktop), open an internet browser and
+navigate to [http://localhost:7080](http://localhost:7080). When prompted for a
+password or token, enter the `<token-id>` printed to your `job.<job-id>.out`
+file (as shown in Step 1 above). After logging in, you should be able to create
+a new (or open an existing) notebook and access the GPUs on the compute node:
+
+![jupyter-notebook](images/jupyter-notebook-gpus.PNG)
+
+```{tip}
+Please see the [Python Environment](./software.md#python-environment) section to understand how the base Python environment and `pytorch` and `tensorflow` modules can be customized.
+```
+
 <!---
 ## Job dependencies (TODO)
 -->
