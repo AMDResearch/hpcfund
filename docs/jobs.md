@@ -11,7 +11,7 @@ Multiple partitions (or queues) are available for users to choose from and each 
 | --------- | :------: | :---------: | :---------------: | :------------------------------------------: |
 | `devel`   | 30 min.  |      1      |        1X         | Targeting short development needs (4xMI100). |
 | `mi1004x` | 24 hours |     16      |        1X         |       4 x MI100 accelerators per node.       |
-| `mi1008x` | 24 hours |      4      |       1.7X        |       8 x MI100 accelerators per node.       |
+| `mi1008x` | 24 hours |     10      |       1.7X        |       8 x MI100 accelerators per node.       |
 ```
 
 Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis.
