@@ -252,6 +252,316 @@ a new (or open an existing) notebook and access the GPUs on the compute node:
 ```{tip}
 Please see the [Python Environment](./software.md#python-environment) section to understand how the base Python environment and `pytorch` and `tensorflow` modules can be customized.
 ```
+## Containers
+The container platform available for use on the HPC Fund cluster is [Singularity/Apptainer](https://apptainer.org/docs/user/main/), which can (of course) use/build Singularity containers or transparently convert Docker images into the Singularity format.
+
+```{note}
+Apptainer is the new name for Singularity, so it will be referred to as Apptainer in the remainder of these docs.
+```
+
+### Simple Ubuntu example
+This example shows how to use Apptainer to pull down the latest base Ubuntu container from DockerHub and run it on the cluster. Notice that the Docker container is converted to the Singularity format (SIF) transparently during the `pull`.
+
+```
+#---- PULL CONTAINER DOWN FROM DOCKERHUB ----#
+$ apptainer pull docker://ubuntu
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+Copying blob 445a6a12be2b done
+Copying config c6b84b685f done
+Writing manifest to image destination
+Storing signatures
+2023/09/21 08:39:13  info unpack layer: sha256:445a6a12be2be54b4da18d7c77d4a41bc4746bc422f1f4325a60ff4fc7ea2e5d
+INFO:    Creating SIF file...
+
+
+#---- RUN CONTAINER ----#
+$ apptainer run ubuntu_latest.sif
+
+
+#---- (INSIDE CONTAINER) PRINT OS DETAILS ----#
+Apptainer> cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.3 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.3 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+```
+### ROCm-Enabled PyTorch example
+This example shows how to use Apptainer to pull down the latest ROCm-enabled PyTorch container from DockerHub and run it on the cluster.
+
+```{note}
+This container is much larger (~13 GB) than the Ubuntu container (~29 MB) so it should be run on a compute node from your project `$WORK` directory.
+
+* Project `$WORK` directories have a larger quota (2 TB shared among all users of the project), whereas user `$HOME` directories only have a quota of 25 GB.
+
+* A compute node is needed to avoid running out of shared resources on the login node while pulling down the container.
+```
+
+```
+#---- GRAB A COMPUTE NODE IN AN INTERACTIVE JOB ----#
+$ salloc -A <project_id> -N 1 -t 60 -p mi1004x
+salloc: ---------------------------------------------------------------
+salloc: AMD HPC Fund Job Submission Filter
+salloc: ---------------------------------------------------------------
+salloc: --> ok: runtime limit specified
+salloc: --> ok: using default qos
+salloc: --> ok: Billing account-> <project_id>/<username>
+salloc: --> checking job limits...
+salloc:     --> requested runlimit = 1.0 hours (ok)
+salloc: --> checking partition restrictions...
+salloc:     --> ok: partition = mi1004x
+salloc: Granted job allocation <job-id>
+
+
+#---- PULL DOWN CONTAINER FROM GITHUB ----#
+$ apptainer pull docker://rocm/pytorch:latest
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+...
+...
+INFO:    Creating SIF file...
+
+
+#---- RUN THE CONTAINER ----#
+$ apptainer run pytorch_latest.sif
+
+
+#---- (INSIDE CONTAINER) CHECK FOR GPUS ----#
+Apptainer> rocm-smi
+========================= ROCm System Management Interface =========================
+=================================== Concise Info ===================================
+GPU  Temp (DieEdge)  AvgPwr  SCLK    MCLK     Fan  Perf  PwrCap  VRAM%  GPU%
+0    35.0c           34.0W   300Mhz  1200Mhz  0%   auto  290.0W    0%   0%
+1    36.0c           34.0W   300Mhz  1200Mhz  0%   auto  290.0W    0%   0%
+2    34.0c           30.0W   300Mhz  1200Mhz  0%   auto  290.0W    0%   0%
+3    34.0c           32.0W   300Mhz  1200Mhz  0%   auto  290.0W    0%   0%
+====================================================================================
+=============================== End of ROCm SMI Log ================================
+
+
+#---- (INSIDE CONTAINER) CHECK GPU INFO ----#
+Apptainer> rocminfo | head
+ROCk module is loaded
+=====================
+HSA System Attributes
+=====================
+Runtime Version:         1.1
+System Timestamp Freq.:  1000.000000MHz
+Sig. Max Wait Duration:  18446744073709551615 (0xFFFFFFFFFFFFFFFF) (timestamp count)
+Machine Model:           LARGE
+System Endianness:       LITTLE
+
+
+#---- (INSIDE CONTAINER) LAUNCH A PYTHON SHELL ----#
+Apptainer> python3
+Python 3.8.16 (default, Jun 12 2023, 18:09:05)
+[GCC 11.2.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+
+#---- (INSIDE CONTAINER) IMPORT PYTORCH ----#
+>>> import torch
+
+
+#---- (INSIDE CONTAINER) CHECK OF ROCM IS AVAILABLE ----#
+>>> print("GPU(s) available:", torch.cuda.is_available())
+GPU(s) available: True
+
+
+#---- (INSIDE CONTAINER) CHECK NUMBER OF GPUS ----#
+>>> print("Number of available GPUs:", torch.cuda.device_count())
+Number of available GPUs: 4
+```
+
+```{note}
+* PyTorch uses `cuda` even when targeting ROCm devices.
+* By default, your `$HOME` and `$WORK` directories are bind-mounted into the container.
+```
+
+### ROCm-enabled TensorFlow example
+This example shows how to use Apptainer to pull down the latest ROCm-enabled TensorFlow container from DockerHub and run it on the cluster.
+
+```{note}
+Similar to the PyTorch container above, this container is much larger (~11 GB) than the Ubuntu container (~29 MB) so it should be run on a compute node from your project `$WORK` directory.
+
+* Project `$WORK` directories have a larger quota (2 TB shared among all users of the project), whereas user `$HOME` directories only have a quota of 25 GB.
+
+* A compute node is needed to avoid running out of shared resources on the login node while pulling down the container.
+```
+
+```
+#---- GRAB A COMPUTE NODE IN AN INTERACTIVE JOB ----#
+$ salloc -A <project_id> -N 1 -t 60 -p mi1004x
+salloc: ---------------------------------------------------------------
+salloc: AMD HPC Fund Job Submission Filter
+salloc: ---------------------------------------------------------------
+salloc: --> ok: runtime limit specified
+salloc: --> ok: using default qos
+salloc: --> ok: Billing account-> <project_id>/<username>
+salloc: --> checking job limits...
+salloc:     --> requested runlimit = 1.0 hours (ok)
+salloc: --> checking partition restrictions...
+salloc:     --> ok: partition = mi1004x
+salloc: Granted job allocation <job-id>
+
+
+#---- PULL DOWN CONTAINER FROM GITHUB ----#
+$ apptainer pull docker://rocm/tensorflow:latest
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+...
+...
+INFO:    Creating SIF file...
+
+
+#---- RUN THE CONTAINER - SEE NOTE BELOW FOR ADDITIONAL FLAGS ----#
+$ apptainer run  --containall --bind=${HOME},${WORK},/dev/kfd,/dev/dri tensorflow_latest.sif
+
+
+#---- (INSIDE CONTAINER) CHECK FOR GPUS ----#
+Apptainer> rocm-smi
+========================= ROCm System Management Interface =========================
+=================================== Concise Info ===================================
+GPU  Temp (DieEdge)  AvgPwr  SCLK    MCLK     Fan  Perf  PwrCap  VRAM%  GPU%
+0    35.0c           34.0W   300Mhz  1200Mhz  0%   auto  290.0W    0%   0%
+1    35.0c           34.0W   300Mhz  1200Mhz  0%   auto  290.0W    0%   0%
+2    34.0c           30.0W   300Mhz  1200Mhz  0%   auto  290.0W    0%   0%
+3    34.0c           32.0W   300Mhz  1200Mhz  0%   auto  290.0W    0%   0%
+====================================================================================
+=============================== End of ROCm SMI Log ================================
+
+
+#---- (INSIDE CONTAINER) CHECK GPU INFO ----#
+Apptainer> rocminfo | head
+ROCk module is loaded
+=====================
+HSA System Attributes
+=====================
+Runtime Version:         1.1
+System Timestamp Freq.:  1000.000000MHz
+Sig. Max Wait Duration:  18446744073709551615 (0xFFFFFFFFFFFFFFFF) (timestamp count)
+Machine Model:           LARGE
+System Endianness:       LITTLE
+
+
+#---- (INSIDE CONTAINER) LAUNCH A PYTHON SHELL ----#
+Apptainer> python3
+Python 3.9.17 (main, Jun  6 2023, 20:11:04)
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+
+#---- (INSIDE CONTAINER) IMPORT PYTORCH ----#
+>>> import tensorflow as tf
+2023-09-21 09:57:29.569788: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+
+#---- (INSIDE CONTAINER) CHECK NUMBER OF GPUS ----#
+>>> gpu_list = tf.config.list_physical_devices('GPU')
+>>> for gpu in gpu_list:
+...     print(gpu)
+...
+PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')
+PhysicalDevice(name='/physical_device:GPU:1', device_type='GPU')
+PhysicalDevice(name='/physical_device:GPU:2', device_type='GPU')
+PhysicalDevice(name='/physical_device:GPU:3', device_type='GPU')
+```
+
+```{note}
+By default, Apptainer will bring environment variables from the host (i.e., compute node) environment into the container. Unlike the PyTorch container above, this TensorFlow container does not appear to set some environment variables (e.g., `LANG`), so the values from the host environment are still set - which can cause some warnings about `hipcc`. 
+
+To resolve this, the `--containall` flag was used to ensure nothing from the host environment gets brought in. This means we need to manually bind-mount some important directories; `/dev/kfd` and `/dev/dri` so the ROCm driver can collect information about the GPUs, and also the `$HOME` and `$WORK` directories. 
+```
+
+### Extending Docker containers with Apptainer
+If users need to build on top of existing containers (e.g., installing additional packages), they can do so with Apptainer definition files. For example, the following definition file can be used to build a container with an upgraded `scipy` and newly-installed `pandas` package using the ROCm-enabled PyTorch container as a starting point. It also sets an environment variable inside the container.
+
+```
+#---- CUSTOMIZED APPTAINER DEFINITION FILE ----#
+$ cat rocm_pt.def
+Bootstrap: docker
+From: rocm/pytorch:latest
+
+%environment
+export MY_ENV_VAR="This is my environment variable"
+
+%post
+    pip3 install --upgrade pip
+    pip3 install scipy --upgrade
+    pip3 install pandas
+
+
+#---- BUILD CUSTOMIZED CONTAINER ----#
+$ apptainer build rocm_pt.sif rocm_pt.def
+...
+...
+Successfully installed numpy-1.24.4 scipy-1.10.1
+...
+Successfully installed pandas-2.0.3 pytz-2023.3.post1 tzdata-2023.3
+...
+INFO:    Adding environment to container
+INFO:    Creating SIF file...
+INFO:    Build complete: rocm_pt.sif
+
+
+#---- RUN THE CONTAINER ----#
+$ apptainer run rocm_pt.sif
+
+
+#---- (INSIDE CONTAINER) PRINT ENVIRONMENT VARIABLE ----#
+Apptainer> echo $MY_ENV_VAR
+This is my environment variable
+
+
+#---- (INSIDE CONTAINER) CHECK IF PANDAS IS INSTALLED ----#
+Apptainer> pip list | grep pandas
+pandas                  2.0.3
+
+
+#---- (INSIDE CONTAINER) LAUNCH A PYTHON SHELL ----#
+Apptainer> python3
+Python 3.8.16 (default, Jun 12 2023, 18:09:05)
+[GCC 11.2.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+
+#---- (INSIDE CONTAINER) IMPORT PANDAS ----#
+>>> import pandas as pd
+
+
+#---- (INSIDE CONTAINER) SHOW PANDAS WORKING ----#
+>>> data = {
+...     "numbers" : [2, 4, 6],
+...     "letters" : ['b', 'd', 'f']
+... }
+
+
+>>> df = pd.DataFrame(data)
+
+
+>>> print(df)
+   numbers letters
+0        2       b
+1        4       d
+2        6       f
+```
+
+As we can see the `pandas` package is now available inside the container, and the ROCm and TensorFlow functionality still works as before.
+
+For more detailed information on using Apptainer definition files, please see [this section](https://apptainer.org/docs/user/main/definition_files.html) of the Apptainer user docs.
+
 
 <!---
 ## Job dependencies (TODO)
