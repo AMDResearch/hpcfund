@@ -2,19 +2,20 @@
 
 The HPC Fund Research Cloud runs the [SLURM](https://slurm.schedmd.com/overview.html) workload resource manager in order to organize job scheduling across the cluster. In order to access back-end compute resources, users must submit jobs to SLURM (either interactive or batch) and the underlying scheduler will manage execution of all jobs using a [multi-factor](https://slurm.schedmd.com/priority_multifactor.html) priority algorithm.
 
-Multiple partitions (or queues) are available for users to choose from and each job submission is associated with a particular partition request.  The table below summarizes available production queues and runlimits currently available:
+Multiple partitions (or queues) are available for users to choose from and each job submission is associated with a particular partition request.  Note that partition names are mostly organized around the type of accelerator hardware installed in the hosts. The table below summarizes available production queues, hardware configuration, allocation charging rates and runtime limits currently available:
 
 
 ```{table} Table 1: Available SLURM queues
 :name: table-queues
 | Queue     | Max Time | Max Node(s) | Charge Multiplier |                Configuration                 |
 | --------- | :------: | :---------: | :---------------: | :------------------------------------------: |
-| `devel`   | 30 min.  |      1      |        1X         | Targeting short development needs (4xMI100). |
-| `mi1004x` | 24 hours |     16      |        1X         |       4 x MI100 accelerators per node.       |
-| `mi1008x` | 24 hours |     10      |       1.7X        |       8 x MI100 accelerators per node.       |
+| `devel`   | 30 min.  |      1      |        1.0X       | Targeting short development needs (4xMI210). |
+| `mi1008x` | 24 hours |      5      |        0.8X       |       8 x MI100 accelerators per node.       |
+| `mi12104x`| 24 hours |     16      |        1.0X       |       4 x MI210 accelerators per node.       |
+| `mi12508x`| 12 hours |     10      |        1.7X       |       4 x MI250 accelerators (8 GPUss) per node.  |
 ```
 
-Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis.
+Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis. You must have an active accounting allocation in order to submit jobs and the resource manager will track the combined number of **node** hours consumed by each job and deduct the [total node hours]*[charge multiplier] from your available balance.
 
 ## Batch job submission
 
@@ -28,7 +29,7 @@ Example SLURM batch job submission scripts are available on the login node at `/
 #SBATCH -N 2                  # Total number of nodes requested
 #SBATCH -n 8                  # Total number of mpi tasks requested
 #SBATCH -t 01:30:00           # Run time (hh:mm:ss) - 1.5 hours
-#SBATCH -p mi1004x            # Desired partition
+#SBATCH -p mi2104x            # Desired partition
 
 # Launch an MPI-based executable
 
@@ -102,7 +103,7 @@ If your application is only configured for single GPU acceleration, you can stil
 #SBATCH -N 1                  # Total number of nodes requested
 #SBATCH -n 4                  # Total number of mpi tasks requested
 #SBATCH -t 01:30:00           # Run time (hh:mm:ss) - 1.5 hours
-#SBATCH -p mi1004x            # Desired partition
+#SBATCH -p mi2104x            # Desired partition
 
 binary=./hipinfo
 args=""

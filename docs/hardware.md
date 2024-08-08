@@ -4,7 +4,32 @@ The HPC Fund Research Cloud consists of 40 high performance computing (HPC) serv
 
 ## Compute servers
 
-Each compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/processors/epyc-server-cpu-family) 7V13 64-core processors with access to 512 GB of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes multiple [AMD MI100](https://www.amd.com/en/products/server-accelerators/instinct-mi100) GPU accelerators (in either 4 or 8 GPU/node configurations). Each individual accelerator has 32GB of high bandwidth memory (HBM) and a peak double-precision (FP64) performance of 11.5 TFLOPS interconnected via PCI Express.
+Each compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/processors/epyc-server-cpu-family) processors with access to 512 GB (or more) of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes one or more [AMD Instinct&trade;](https://www.amd.com/en/products/accelerators/instinct.html) accelerators. Multiple generations of accelerators are available within the system with key characteristics highlighted as follows:
+<!-- * [AMD MI100 Accelerator](https://www.amd.com/en/products/accelerators/instinct/mi100.html) 
+  * Peak double-precision (FP64) performance of 11.5 TFLOPs
+  * 32 GB of high bandwidth memory (HBM2e)
+  * Peak GPU memory bandwidth 1.2 TB/s  
+  * Form factor: PCIe Add-in Card
+* [AMD MI210 Accelerator](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html)
+  * Peak double-precision (FP64) performance of 45.3 TFLOPs
+  * 64 GB of high bandwidth memory (HBM2e)
+  * Peak GPU memory bandwidth 1.6 TB/s
+  Form factor: PCIe Add-in Card
+* [AMD MI250 Accelerator](https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html)
+  * Peak double-precision (FP64) performance of 43.3 TFLOPs (per GCD)
+  * 64 GB of high bandwidth memory (HBM2e) (per GCD)
+  * Peak GPU memory bandwidth 1.6 TB/s (per GCD)
+  * Form factor: OAM Module -->
+
+  ```{table} Table 1:  Hardware Overview of Available Node Types
+| Accelerator       | Peak FP64 | HBM Capacity | HBM Peak B/W |            Host CPU                 | Host Memory |
+| --------- | :------: | :---------: | :---------------: | :------------------------------------------: | :---: |
+| [AMD MI100](https://www.amd.com/en/products/accelerators/instinct/mi100.html)  | 11.5 TFLOPs  |   32GB |   1.2 TB/s | 2 X EPYC 7V13 64-core | 512 GB |
+| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html)  | 45.3 TFLOPs  |   64GB |   1.6 TB/s | 2 X EPYC 7V13 64-core | 512 GB |
+| [AMD MI250](https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html)  |  45.3 TFLOPs (per GCD) |  64GB (per GCD) |   1.6 TB/s (per GCD) | 2 X EPYC 7763 64-Core | 1.5 TB |
+```
+
+Note that one AMD MI250 accelerator provides two Graphics Compute Dies (GCDs) for which the programmer can use as two separate GPUs.
 
 ## File systems
 
