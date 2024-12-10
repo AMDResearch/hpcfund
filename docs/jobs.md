@@ -7,12 +7,12 @@ Multiple partitions (or queues) are available for users to choose from and each 
 
 ```{table} Table 1: Available SLURM queues
 :name: table-queues
-| Queue     | Max Time | Max Node(s) | Charge Multiplier |                Configuration                 |
-| --------- | :------: | :---------: | :---------------: | :------------------------------------------: |
-| `devel`   | 30 min.  |      1      |        1.0X       | Targeting short development needs (4xMI210). |
-| `mi1008x` | 24 hours |      5      |        0.8X       |       8 x MI100 accelerators per node.       |
-| `mi12104x`| 24 hours |     16      |        1.0X       |       4 x MI210 accelerators per node.       |
-| `mi12508x`| 12 hours |     10      |        1.7X       |       4 x MI250 accelerators (8 GPUss) per node.  |
+| Queue     | Max Time | Max Node(s) | Charge Multiplier |                Configuration                     |
+| --------- | -------- | ----------- | ----------------- | ------------------------------------------------ |
+| `devel`   | 30 min.  |      1      |        1.0X       | Targeting short development needs (4xMI210).     |
+| `mi1008x` | 24 hours |      5      |        0.8X       | 8 x MI100 accelerators per node.                 |
+| `mi2104x` | 24 hours |     16      |        1.0X       | 4 x MI210 accelerators per node.                 |
+| `mi2508x` | 12 hours |     10      |        1.7X       | 4 x MI250 accelerators (8 GPUs) per node.        |
 ```
 
 Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis. You must have an active accounting allocation in order to submit jobs and the resource manager will track the combined number of **node** hours consumed by each job and deduct the [total node hours]*[charge multiplier] from your available balance.
