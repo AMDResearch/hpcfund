@@ -13,9 +13,28 @@ Multiple partitions (or queues) are available for users to choose from and each 
 | `mi1008x` | 24 hours |      5      |        0.8X       | 8 x MI100 accelerators per node.                 |
 | `mi2104x` | 24 hours |     16      |        1.0X       | 4 x MI210 accelerators per node.                 |
 | `mi2508x` | 12 hours |     10      |        1.7X       | 4 x MI250 accelerators (8 GPUs) per node.        |
+| `mi3008x`  | 4 hours |     1       |        2.0X       | 8 x MI300X accelerators per node.                |
+| `mi3008x_long` | 8 hours  |     1  |        2.0X       | 8 x MI300X accelerators per node.                |
 ```
 
 Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis. You must have an active accounting allocation in order to submit jobs and the resource manager will track the combined number of **node** hours consumed by each job and deduct the [total node hours]*[charge multiplier] from your available balance.
+
+
+## Offload Architecture Options
+
+Since multiple generations of Instinct&trade; accelerators are available across the cluster, users building their own [HIP](https://rocm.docs.amd.com/projects/HIP/en/latest/) applications should include the correct target offload architecture during compilation based on the desired GPU type. The following table highlights the offload architecture types and compilation option that maps to available SLURM partitions.
+
+```{table} Table 2: Offload architecture settings for local HIP compilation
+:widths:  25 25 50
+Partition Name      |  GPU Type | ROCm Offload Architecture Compile Flag
+---------------|-----------|-----------------------
+devel          | MI210 x 4 | `--offload-arch=gfx90a`
+mi2104x        | MI210 x 4 | `--offload-arch=gfx90a`
+mi2508x        | MI250 x 8 | `--offload-arch=gfx90a`
+mi3008x        | MI300 x 8 | `--offload-arch=gfx942`
+mi3008x_long   | MI300 x 8 | `--offload-arch=gfx942`
+mi1008x        | MI100 x 8 | `--offload-arch=gfx908`
+```
 
 ## Batch job submission
 
@@ -162,6 +181,7 @@ The table below highlights several of the more common user-facing SLURM commands
 | scontrol | view or modify a job configuration |
 ```
 
+(jupyter)=
 ## Jupyter
 
 Users can run Jupyter Notebooks on the HPC Fund compute nodes by making a copy

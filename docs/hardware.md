@@ -27,6 +27,7 @@ Each compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/pro
 | [AMD MI100](https://www.amd.com/en/products/accelerators/instinct/mi100.html)  | 11.5 TFLOPs  |   32GB |   1.2 TB/s | 2 X EPYC 7V13 64-core | 512 GB |
 | [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html)  | 45.3 TFLOPs  |   64GB |   1.6 TB/s | 2 X EPYC 7V13 64-core | 512 GB |
 | [AMD MI250](https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html)  |  45.3 TFLOPs (per GCD) |  64GB (per GCD) |   1.6 TB/s (per GCD) | 2 X EPYC 7763 64-Core | 1.5 TB |
+| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) | 81.7 TFLOPs |  192GB |  5.3 TB/s (per GCD) | 2 X EPYC 9684X 96-Core  | 2.3 TB |
 ```
 
 Note that one AMD MI250 accelerator provides two Graphics Compute Dies (GCDs) for which the programmer can use as two separate GPUs.
