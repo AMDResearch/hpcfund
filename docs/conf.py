@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'HPC Fund'
-copyright = '2023, Advanced Micro Devices, Inc. All Rights Reserved.'
+copyright = '2023-2025, Advanced Micro Devices, Inc. All Rights Reserved.'
 author = 'AMD Research'
 
 
