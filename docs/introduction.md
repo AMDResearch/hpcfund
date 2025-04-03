@@ -17,7 +17,7 @@ provide access to remote AMD hardware technologies in a collaborative research e
 
 ## Terms of Use
 
-System usage is governed by the [AMD HPC Fund Terms of Use](https://www.amd.com/system/files/documents/hpc-fund-terms-of-use.pdf).
+System usage is governed by the [AMD HPC Fund Terms of Use](https://www.amd.com/content/dam/amd/en/documents/legal/hpc-research-cluster-terms-of-use.pdf).
 
 ## Acknowledgement
 
