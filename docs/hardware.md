@@ -4,7 +4,7 @@ The HPC Fund Research Cloud consists of 40 high performance computing (HPC) serv
 
 ## Compute servers
 
-Each compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/processors/epyc-server-cpu-family) processors with access to 512 GB (or more) of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes one or more [AMD Instinct&trade;](https://www.amd.com/en/products/accelerators/instinct.html) accelerators. Multiple generations of accelerators are available within the system with key characteristics highlighted as follows:
+Each bare-metal compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/processors/epyc-server-cpu-family) processors with access to 512 GB (or more) of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes one or more [AMD Instinct&trade;](https://www.amd.com/en/products/accelerators/instinct.html) accelerators. Multiple generations of accelerators are available within the system with key characteristics highlighted as follows:
 <!-- * [AMD MI100 Accelerator](https://www.amd.com/en/products/accelerators/instinct/mi100.html) 
   * Peak double-precision (FP64) performance of 11.5 TFLOPs
   * 32 GB of high bandwidth memory (HBM2e)
@@ -22,11 +22,12 @@ Each compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/pro
   * Form factor: OAM Module -->
 
   ```{table} Table 1:  Hardware Overview of Available Node Types
-| Accelerator       | Peak FP64 | HBM Capacity | HBM Peak B/W |            Host CPU                 | Host Memory |
-| --------- | :------: | :---------: | :---------------: | :------------------------------------------: | :---: |
-| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html)  | 45.3 TFLOPs  |   64GB |   1.6 TB/s | 2 X EPYC 7V13 64-core | 512 GB |
-| [AMD MI250](https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html)  |  45.3 TFLOPs (per GCD) |  64GB (per GCD) |   1.6 TB/s (per GCD) | 2 X EPYC 7763 64-Core | 1.5 TB |
-| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) | 81.7 TFLOPs |  192GB |  5.3 TB/s | 2 X EPYC 9684X 96-Core  | 2.3 TB |
+| Accelerator       | Peak FP64 | HBM<br> Capacity | HBM <br> Peak B/W |             Host CPU                 | Host<br>Memory |
+| --------- | :------: | :---------: | :---------------: | :--------: | :---: |
+| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (1&nbsp;GPU/node) | 45.3 TFLOPs  |   64GB |   1.6 TB/s | EPYC 7V13 16-core (VM) | 64 GB (VM) |
+| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (4&nbsp;GPUs/node)  | 45.3 TFLOPs  |   64GB |   1.6 TB/s | 2 X EPYC 7V13 64-core | 512 GB |
+| [AMD MI250](https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html) <br> (8&nbsp;GCDs/node)  |  45.3 TFLOPs (per GCD) |  64GB (per GCD) |   1.6 TB/s (per GCD) | 2 X EPYC 7763 64-Core | 1.5 TB |
+| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  192GB |  5.3 TB/s | 2 X EPYC 9684X 96-Core  | 2.3 TB |
 ```
 
 Note that one AMD MI250 accelerator provides two Graphics Compute Dies (GCDs) for which the programmer can use as two separate GPUs.

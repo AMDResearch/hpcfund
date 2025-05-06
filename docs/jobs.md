@@ -10,6 +10,7 @@ Multiple partitions (or queues) are available for users to choose from and each 
 | Queue     | Max Time | Max Node(s) | Charge Multiplier |                Configuration                     |
 | --------- | -------- | ----------- | ----------------- | ------------------------------------------------ |
 | `devel`   | 30 min.  |      1      |        1.0X       | Targeting short development needs (4xMI210).     |
+| `mi2101x` | 12 hours |      1      |       0.25X       | 1 MI210 accelerator per node.                   |
 | `mi2104x` | 24 hours |     16      |        1.0X       | 4 x MI210 accelerators per node.                 |
 | `mi2508x` | 12 hours |     10      |        1.7X       | 4 x MI250 accelerators (8 GPUs) per node.        |
 | `mi3008x`  | 4 hours |     1       |        2.0X       | 8 x MI300X accelerators per node.                |
@@ -28,6 +29,7 @@ Since multiple generations of Instinct&trade; accelerators are available across 
 Partition Name      |  GPU Type | ROCm Offload Architecture Compile Flag
 ---------------|-----------|-----------------------
 devel          | MI210 x 4 | `--offload-arch=gfx90a`
+mi2101x        | MI210 x 1 | `--offload-arch=gfx90a`
 mi2104x        | MI210 x 4 | `--offload-arch=gfx90a`
 mi2508x        | MI250 x 8 | `--offload-arch=gfx90a`
 mi3008x        | MI300 x 8 | `--offload-arch=gfx942`
@@ -270,7 +272,7 @@ a new (or open an existing) notebook and access the GPUs on the compute node:
 ![jupyter-notebook](images/jupyter-notebook-gpus.PNG)
 
 ```{tip}
-Please see the [Python Environment](./software.md#python-environment) section to understand how the base Python environment and `pytorch` and `tensorflow` modules can be customized.
+Please see the [Python Environment](python-environment) section to understand how the base Python environment and `pytorch` and `tensorflow` modules can be customized.
 ```
 
 ## Large Language Models (Ollama)
