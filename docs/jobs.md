@@ -9,8 +9,8 @@ Multiple partitions (or queues) are available for users to choose from and each 
 :name: table-queues
 | Queue     | Max Time | Max Node(s) | Charge Multiplier |                Configuration                     |
 | --------- | -------- | ----------- | ----------------- | ------------------------------------------------ |
-| `devel`   | 30 min.  |      1      |        1.0X       | Targeting short development needs (4xMI210).     |
-| `mi2101x` | 12 hours |      1      |       0.25X       | 1 MI210 accelerator per node.                   |
+| `devel`   | 30 min.  |      1      |       0.25X       | Targeting short development needs (1xMI210).     |
+| `mi2101x` | 12 hours |      1      |       0.25X       | 1 x MI210 accelerator per node.                   |
 | `mi2104x` | 24 hours |     16      |        1.0X       | 4 x MI210 accelerators per node.                 |
 | `mi2508x` | 12 hours |     10      |        1.7X       | 4 x MI250 accelerators (8 GPUs) per node.        |
 | `mi3008x`  | 4 hours |     1       |        2.0X       | 8 x MI300X accelerators per node.                |
