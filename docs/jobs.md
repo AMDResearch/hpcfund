@@ -10,9 +10,10 @@ Multiple partitions (or queues) are available for users to choose from and each 
 | Queue     | Max Time | Max Node(s) | Charge Multiplier |                Configuration                     |
 | --------- | -------- | ----------- | ----------------- | ------------------------------------------------ |
 | `devel`   | 30 min.  |      1      |       0.25X       | Targeting short development needs (1xMI210).     |
-| `mi2101x` | 12 hours |      1      |       0.25X       | 1 x MI210 accelerator per node.                   |
+| `mi2101x` | 12 hours |      1      |       0.25X       | 1 x MI210 accelerator per node.                  |
 | `mi2104x` | 24 hours |     16      |        1.0X       | 4 x MI210 accelerators per node.                 |
 | `mi2508x` | 12 hours |     10      |        1.7X       | 4 x MI250 accelerators (8 GPUs) per node.        |
+| `mi3001x`  | 4 hours |     1       |        0.25X      | 1 x MI300X accelerator per node.                 |
 | `mi3008x`  | 4 hours |     1       |        2.0X       | 8 x MI300X accelerators per node.                |
 | `mi3008x_long` | 8 hours  |     1  |        2.0X       | 8 x MI300X accelerators per node.                |
 | `mi3258x`  | 4 hours |     1       |        2.1X       | 8 x MI325X accelerators per node.                |
@@ -33,6 +34,7 @@ devel          | MI210 x 4 | `--offload-arch=gfx90a`
 mi2101x        | MI210 x 1 | `--offload-arch=gfx90a`
 mi2104x        | MI210 x 4 | `--offload-arch=gfx90a`
 mi2508x        | MI250 x 8 | `--offload-arch=gfx90a`
+mi3001x        | MI300 x 1 | `--offload-arch=gfx942`
 mi3008x        | MI300 x 8 | `--offload-arch=gfx942`
 mi3008x_long   | MI300 x 8 | `--offload-arch=gfx942`
 mi3258x        | MI325 x 8 | `--offload-arch=gfx942`
