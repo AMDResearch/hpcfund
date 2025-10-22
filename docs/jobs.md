@@ -298,32 +298,39 @@ salloc -N <number-of-nodes> -t <walltime> -p <partition>
 
 **Step 1:**
 
-Download the Ollama executable and start the server.
+Download and extract the Ollama packages and start the server.
 
 ```bash
-curl -L https://ollama.com/download/ollama-linux-amd64 --output ollama
-chmod a+x ollama
+mkdir <my-ollama-dir>
+cd <my-ollama-dir>
+
+curl -LO https://ollama.com/download/ollama-linux-amd64.tgz
+tar -xzvf ollama-linux-amd64.tgz
+
+curl -LO https://ollama.com/download/ollama-linux-amd64-rocm.tgz
+tar -xzvf ollama-linux-amd64-rocm.tgz
 ```
 
-If you are comfortable creating multiple terminal sessions on the compute same node, then simply run the serve command and open up a new terminal session on the same node to interact with the server.
+If you are comfortable creating multiple terminal sessions on the same compute node, then simply run the serve command and open up a new terminal session on the same node to interact with the server.
 ```bash
-OLLAMA_MODELS=<path-to-store-models> ./ollama serve
+OLLAMA_MODELS=<path-to-store-models> ./bin/ollama serve
 ```
 
 Otherwise you can run the server in the background with optional logging as follows:
 ```bash
-OLLAMA_MODELS=<path-to-store-models> ./ollama serve 2>&1 | tee log > /dev/null &
+OLLAMA_MODELS=<path-to-store-models> ./bin/ollama serve 2>&1 | tee log > /dev/null &
 ```
+
 ```{note}
-By default, the models downloaded in Step 2 below will be saved in `~/.ollama`. However, your `$HOME` directory only has a storage capacity of 25GB and so can quickly fill up with larger models. Therefore, we recommend using the `OLLAMA_MODELS` evironment variable to change the directory where the models are saved to a location within your `$WORK` directory, which has a much larger capacity.
+By default, the models downloaded in Step 2 below will be saved in `~/.ollama`. However, your `$HOME` directory only has a storage capacity of 25GB and so can quickly fill up with larger models. Therefore, we recommend using the `OLLAMA_MODELS` environment variable to change the directory where the models are saved to a location within your `$WORK` directory, which has a much larger capacity.
 ```
 
 **Step 2:**
 
-Ollama hosts a list of open-weight models available on their [site](https://ollama.com/library). In this example we will pull in the Llama3 8B model -- one of the most popular open-weight models released by [Meta](https://llama.meta.com/llama3/).
+Ollama hosts a list of open-weight models available on their [site](https://ollama.com/library). In this example we will pull in the Llama3.1 8B model -- one of the most popular open-weight models released by [Meta](https://llama.meta.com/llama3/).
 
 ```bash
-./ollama pull llama3
+./bin/ollama pull llama3.1:8b
 ```
 
 As described in Step 1, these models will be saved in the directory specified by using the `OLLAMA_MODELS` environment variable.
@@ -335,11 +342,11 @@ The Ollama server is OpenAI API compatible and uses port **11434** by default. T
 ```bash
 curl http://localhost:11434/v1/chat/completions -H "Content-Type: application/json" \
         -d '{
-        "model": "llama3",
+        "model": "llama3.1:8b",
         "messages": [
             {
                 "role": "system",
-                "content": "You are a helpful assistant."
+                "content": "You are a helpful and very concise assistant."
             },
             {
                 "role": "user",
@@ -347,8 +354,11 @@ curl http://localhost:11434/v1/chat/completions -H "Content-Type: application/js
             }
         ]
     }'
-{"id":"chatcmpl-318","object":"chat.completion","created":1717762800,"model":"llama3","system_fingerprint":"fp_ollama","choices":[{"index":0,"message":{"role":"assistant","content":"The classic question!\n\nAccording to the most popular answer, the chicken crossed the road to get to the other side! But let's be honest, there are many creative and humorous responses to this question too.\n\nDo you have a favorite reason why the chicken might have crossed the road?"},"finish_reason":"stop"}],"usage":{"prompt_tokens":28,"completion_tokens":57,"total_tokens":85}}
+```
 
+Response:
+```bash
+{"id":"chatcmpl-331","object":"chat.completion","created":1761150510,"model":"llama3.1:8b","system_fingerprint":"fp_ollama","choices":[{"index":0,"message":{"role":"assistant","content":"Classic joke! The answer is: \"To get to the other side!\" Would you like a more creative or humorous take on it, though?"},"finish_reason":"stop"}],"usage":{"prompt_tokens":32,"completion_tokens":30,"total_tokens":62}}
 ```
 
 Similarly, in Python, one can use the OpenAI Python package to interface with the Ollama server. To do so, you will first need to install the `openai` package in your user install directory or within a Python virtual environment.
@@ -364,13 +374,15 @@ Now you can use the Python OpenAI client to invoke your locally run Llama3 model
 from openai import OpenAI
 client = OpenAI(base_url="http://localhost:11434/v1", api_key="none")
 response = client.chat.completions.create(
-    model="llama3",
+    model="llama3.1:8b",
     messages=[{"role": "user", "content": "Hello this is a test"}],
 )
 print(response)
 ```
+
+Response:
 ```
-ChatCompletion(id='chatcmpl-400', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content="Hello! This is indeed a test. I'm happy to be a part of it. How can I help you with your test?", role='assistant', function_call=None, tool_calls=None))], created=1717763172, model='llama3', object='chat.completion', system_fingerprint='fp_ollama', usage=CompletionUsage(completion_tokens=28, prompt_tokens=13, total_tokens=41))
+ChatCompletion(id='chatcmpl-782', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='This conversation just started, so no messages have been sent yet. What would you like to talk about or practice with me?', refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=None))], created=1761150781, model='llama3.1:8b', object='chat.completion', service_tier=None, system_fingerprint='fp_ollama', usage=CompletionUsage(completion_tokens=26, prompt_tokens=15, total_tokens=41, completion_tokens_details=None, prompt_tokens_details=None))
 ```
 
 **Step 4:**
