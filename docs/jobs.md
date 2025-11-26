@@ -14,9 +14,8 @@ Multiple partitions (or queues) are available for users to choose from and each 
 | `mi2104x` | 24 hours |     16      |        1.0X       | 4 x MI210 accelerators per node.                 |
 | `mi2508x` | 12 hours |     10      |        1.7X       | 4 x MI250 accelerators (8 GPUs) per node.        |
 | `mi3001x`  | 4 hours |     1       |        0.25X      | 1 x MI300X accelerator per node.                 |
-| `mi3008x`  | 4 hours |     1       |        2.0X       | 8 x MI300X accelerators per node.                |
-| `mi3008x_long` | 8 hours  |     1  |        2.0X       | 8 x MI300X accelerators per node.                |
-| `mi3258x`  | 4 hours |     1       |        2.1X       | 8 x MI325X accelerators per node.                |
+| `mi3008x`  | 12 hours |     1       |        2.0X       | 8 x MI300X accelerators per node.                |
+| `mi3258x`  | 12 hours |     1       |        2.1X       | 8 x MI325X accelerators per node.                |
 ```
 
 Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis. You must have an active accounting allocation in order to submit jobs and the resource manager will track the combined number of **node** hours consumed by each job and deduct the [total node hours]*[charge multiplier] from your available balance.
