@@ -5,7 +5,7 @@ The AMD University Program (AUP) AI & HPC Cluster supports **academic AI and HPC
 When submitting a proposal, you will estimate the node-hours your project needs **in each partition** (i.e., node type; see Table 1) over a **1-year period**, which will then be normalized into a single node-hour allocation.
 
 This guide explains how to prepare those estimates when completing the proposal (Step 3 of our 3-Step process):  
-https://www.amd.com/en/corporate/university-program/ai-hpc-cluster.html#apply
+[https://www.amd.com/en/corporate/university-program/ai-hpc-cluster.html#apply](https://www.amd.com/en/corporate/university-program/ai-hpc-cluster.html#apply)
 
 ---
 ## Available Partitions and Capacity
