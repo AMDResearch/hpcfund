@@ -24,5 +24,6 @@ discussion category on the companion HPC Fund `GitHub site
    access
    jobs
    software
+   nodehours
    help
    disclaimer
