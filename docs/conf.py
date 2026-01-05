@@ -18,8 +18,19 @@
 # -- Project information -----------------------------------------------------
 
 project = 'HPC Fund'
-copyright = '2023-2025, Advanced Micro Devices, Inc. All Rights Reserved.'
+copyright = '2023-2026, Advanced Micro Devices, Inc. All Rights Reserved.'
 author = 'AMD Research'
+myst_substitutions = {
+    "devel_weight": "0.1",
+    "mi2101x_weight": "0.1",
+    "mi2104x_weight": "0.4",
+    "mi2508x_weight": "0.8",
+    "mi3001x_weight": "0.125",
+    "mi3008x_weight": "1.0",
+    "mi3258x_weight": "1.2",
+    "mi3501x_weight": "0.175",
+    "mi3508x_weight": "1.4",
+}
 
 
 # -- General configuration ---------------------------------------------------
@@ -30,6 +41,11 @@ author = 'AMD Research'
 extensions = [
     "sphinx.ext.githubpages",
     "myst_parser",
+]
+
+# Enable MyST extensions
+myst_enable_extensions = [
+    "substitution",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
