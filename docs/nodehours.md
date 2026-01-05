@@ -12,16 +12,16 @@ This guide explains how to prepare those estimates when completing the proposal 
 
 **Table 1. Partitions, charge factors, and approximate annual and quarterly capacity**
 
-| Partition | GPUs<br>per node | GPU type            | Number<br>of nodes | Charge<br>factor | ~Annual<br>node-hours |
-| --------- | ------------- | ------------------- | --------------- | ------------- | ---------------------------- |
-| mi3508x   | 8             | AMD Instinct MI350X | 4               | 1.40          | ~33,000                      |
-| mi3501x   | 1             | AMD Instinct MI350X | 8               | 0.175         | ~67,000                      |
-| mi3258x   | 8             | AMD Instinct MI325X | 1               | 1.20          | ~8,000                       |
-| mi3008x   | 8             | AMD Instinct MI300X | 2               | 1.00          | ~17,000                      |
-| mi3001x   | 1             | AMD Instinct MI300X | 8               | 0.125         | ~67,000                      |
-| mi2508x   | 8             | AMD Instinct MI250  | 10              | 0.80          | ~83,000                      |
-| mi2104x   | 4             | AMD Instinct MI210  | 11              | 0.40          | ~92,000                      |
-| mi2101x   | 1             | AMD Instinct MI210  | 28              | 0.10          | ~233,000                     |
+| Partition | GPUs<br>per node | GPU type     | Number<br>of nodes | Charge<br>factor | ~Annual<br>node-hours |
+| --------- | --------- | ------------------- | --------------- | ------------- | ---------------------------- |
+| mi3508x   | 8         | AMD Instinct MI350X | 4               | {{mi3508x_weight}} | ~33,000         |
+| mi3501x   | 1         | AMD Instinct MI350X | 8               | {{mi3501x_weight}} | ~67,000         |
+| mi3258x   | 8         | AMD Instinct MI325X | 1               | {{mi3258x_weight}} | ~8,000          |
+| mi3008x   | 8         | AMD Instinct MI300X | 2               | {{mi3008x_weight}} | ~17,000         |
+| mi3001x   | 1         | AMD Instinct MI300X | 8               | {{mi3001x_weight}} | ~67,000         |
+| mi2508x   | 8         | AMD Instinct MI250  | 10              | {{mi2508x_weight}} | ~83,000         |
+| mi2104x   | 4         | AMD Instinct MI210  | 11              | {{mi2104x_weight}} | ~92,000         |
+| mi2101x   | 1         | AMD Instinct MI210  | 28              | {{mi2101x_weight}} | ~233,000        |
 
 - Approximate annual node-hours in this table reflect total usable capacity across the entire cluster and are shared among all projects. 
 
