@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'HPC Fund'
+project = 'AUP AI & HPC Cluster'
 copyright = '2023-2026, Advanced Micro Devices, Inc. All Rights Reserved.'
 author = 'AMD Research'
 myst_substitutions = {

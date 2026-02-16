@@ -1,6 +1,6 @@
 # Running Jobs
 
-The HPC Fund Research Cloud runs the [SLURM](https://slurm.schedmd.com/overview.html) workload resource manager in order to organize job scheduling across the cluster. In order to access back-end compute resources, users must submit jobs to SLURM (either interactive or batch) and the underlying scheduler will manage execution of all jobs using a [multi-factor](https://slurm.schedmd.com/priority_multifactor.html) priority algorithm.
+The AI & HPC Cluster runs the [SLURM](https://slurm.schedmd.com/overview.html) workload resource manager in order to organize job scheduling across the cluster. In order to access back-end compute resources, users must submit jobs to SLURM (either interactive or batch) and the underlying scheduler will manage execution of all jobs using a [multi-factor](https://slurm.schedmd.com/priority_multifactor.html) priority algorithm.
 
 Multiple partitions (or queues) are available for users to choose from and each job submission is associated with a particular partition request.  Note that partition names are mostly organized around the type of accelerator hardware installed in the hosts. The table below summarizes available production queues, hardware configuration, allocation charging rates and runtime limits currently available:
 
@@ -97,7 +97,7 @@ To terminate an interactive job, simply type `exit` at your shell prompt.
 
 
 ## Compute node access
-HPC Fund compute nodes are allocated in an **exclusive** fashion such that only a single user is on a node at any one time and is allocated all resources associated with the host (CPUs, host memory, GPUs, etc). Consequently, ssh access to back-end compute hosts are dynamically controlled with temporary access granted for the duration of a user's job.  The `squeue` command can be used to interrogate a running job and identify assigned hosts in order to gain ssh access. For example:
+The AI & HPC Cluster compute nodes are allocated in an **exclusive** fashion such that only a single user is on a node at any one time and is allocated all resources associated with the host (CPUs, host memory, GPUs, etc). Consequently, ssh access to back-end compute hosts are dynamically controlled with temporary access granted for the duration of a user's job.  The `squeue` command can be used to interrogate a running job and identify assigned hosts in order to gain ssh access. For example:
 
 ```{code-block} console
 [test@login1 ~]$ squeue -j 451
@@ -111,7 +111,7 @@ HPC Fund compute nodes are allocated in an **exclusive** fashion such that only 
 
 ## Aggregating tasks using job steps
 
-As mentioned above, the HPC Fund compute nodes are allocated for **exclusive** usage - i.e. they are not shared amongst multiple jobs or users. Consequently, accounting charges are accrued at the node-hour level with charge multipliers highlighted in [Table 1](#table-queues).  To maximize efficiency of the consumed node hours, users are encouraged to take advantage of multiple GPU resources per node whenever possible.
+As mentioned above, the AI & HPC Cluster compute nodes are allocated for **exclusive** usage - i.e. they are not shared amongst multiple jobs or users. Consequently, accounting charges are accrued at the node-hour level with charge multipliers highlighted in [Table 1](#table-queues).  To maximize efficiency of the consumed node hours, users are encouraged to take advantage of multiple GPU resources per node whenever possible.
 
 If your application is only configured for single GPU acceleration, you can still take advantage of multiple GPUs by aggregating several independent tasks together to run in a single SLURM job. There are a variety of ways to do this, but we highlight an example below using job steps. In this case, the assumption is that a user has four independent, single-GPU tasks they would like to run simultaneously on a single node in order to take advantage of all GPU resources available.  An example job script named `job.launcher` demonstrating this approach is available on the system at `/opt/ohpc/pub/examples/slurm`. An example copy is shown below which requests four tasks on a compute node. Note the use of the `HIP_VISIBLE_DEVICES` environment variable to map each task to a unique GPU device.
 
@@ -187,14 +187,14 @@ The table below highlights several of the more common user-facing SLURM commands
 (jupyter)=
 ## Jupyter
 
-Users can run Jupyter Notebooks on the HPC Fund compute nodes by making a copy
+Users can run Jupyter Notebooks on the AI & HPC Cluster compute nodes by making a copy
 of the example batch script (available here:
 `/opt/ohpc/pub/examples/slurm/job.notebook`) and customizing it to fit their
 needs. The script can then be used by following steps 1-3 below.
 
 **Step 1:**
 
-While logged into the HPC Fund cluster, make a copy of the batch script, submit
+While logged into the AI & HPC Cluster, make a copy of the batch script, submit
 it to the batch system, and `cat` the contents of the newly-created
 `job.<job-id>.out` file (where `<job-id>` is the Job ID for your batch job):
 

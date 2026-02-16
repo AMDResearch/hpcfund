@@ -1,6 +1,6 @@
 # Software
 
-The HPC Fund Research Cloud uses [Lmod](https://github.com/TACC/Lmod) to manage the software user-environment.  With a default login shell, users will have a number of different modules pre-loaded as highlighted below. 
+The AUP AI & HPC Cluster uses [Lmod](https://github.com/TACC/Lmod) to manage the software user-environment.  With a default login shell, users will have a number of different modules pre-loaded as highlighted below. 
 
 ```
 [test@login1 ~]$ module list
@@ -33,7 +33,7 @@ The `module help` command can also be run locally on the system to get more info
 (python-environment)=
 ## Python Environment
 
-A base Python installation is available on the HPC Fund cluster which includes a handful of common packages (e.g., `numpy`, `pandas`). If additional packages are needed, users can customize their environments by installing packages with a user install, creating a Python virtual environment to install packages in, or loading a module for a specific package (e.g., `pytorch`, `tensorflow`). Examples of each method are given below.
+A base Python installation is available on the cluster which includes a handful of common packages (e.g., `numpy`, `pandas`). If additional packages are needed, users can customize their environments by installing packages with a user install, creating a Python virtual environment to install packages in, or loading a module for a specific package (e.g., `pytorch`, `tensorflow`). Examples of each method are given below.
 
 ### Python user installs
 

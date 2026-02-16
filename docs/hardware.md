@@ -1,10 +1,10 @@
 # System Overview
 
-The HPC Fund Research Cloud consists of 40 high performance computing (HPC) servers attached to a unifying high-speed InfiniBand fabric supporting high-bandwidth, low-latency message passing for distributed-memory applications.  Each servers consists of dual-socket CPUs combined with multiple AMD Instinct MI series [accelerators](https://www.amd.com/en/graphics/instinct-server-accelerators).  The supporting operating system is [Rocky Linux](https://rockylinux.org). Additional details regarding the hardware configuration is summarized below.
+The AUP AI & HPC Cluster consists of 40 high performance computing (HPC) servers attached to a unifying high-speed InfiniBand fabric supporting high-bandwidth, low-latency message passing for distributed-memory applications.  Each servers consists of dual-socket CPUs combined with multiple AMD Instinct MI series [accelerators](https://www.amd.com/en/products/accelerators/instinct.html).  The supporting operating system is [Rocky Linux](https://rockylinux.org). Additional details regarding the hardware configuration is summarized below.
 
 ## Compute servers
 
-Each bare-metal compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/processors/epyc-server-cpu-family) processors with access to 512 GB (or more) of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes one or more [AMD Instinct&trade;](https://www.amd.com/en/products/accelerators/instinct.html) accelerators. Multiple generations of accelerators are available within the system with key characteristics highlighted as follows:
+Each bare-metal compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/products/processors/server/epyc.html) processors with access to 512 GB (or more) of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes one or more [AMD Instinct&trade;](https://www.amd.com/en/products/accelerators/instinct.html) accelerators. Multiple generations of accelerators are available within the system with key characteristics highlighted as follows:
 <!-- * [AMD MI100 Accelerator](https://www.amd.com/en/products/accelerators/instinct/mi100.html) 
   * Peak double-precision (FP64) performance of 11.5 TFLOPs
   * 32 GB of high bandwidth memory (HBM2e)
@@ -32,7 +32,7 @@ Each bare-metal compute server consists of two [AMD EPYC&trade;](https://www.amd
 | [AMD MI325X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi325x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  256GB |  6.0 TB/s | 2 X EPYC 9755 128-Core  | 3 TB |
 ```
 
-Note that one AMD MI250 accelerator provides two Graphics Compute Dies (GCDs) for which the programmer can use as two separate GPUs.
+Note that each AMD MI250 accelerator provides two Graphics Compute Dies (GCDs) for which the programmer can use as two separate GPUs.
 
 ## File systems
 
