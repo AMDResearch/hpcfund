@@ -39,6 +39,7 @@ mi3008x_long   | MI300 x 8 | `--offload-arch=gfx942`
 mi3258x        | MI325 x 8 | `--offload-arch=gfx942`
 ```
 
+(batch-jobs)=
 ## Batch job submission
 
 Example SLURM batch job submission scripts are available on the login node at `/opt/ohpc/pub/examples/slurm`.  A basic starting job for MPI-based applications is available in this directory named `job.mpi` and is shown below for reference:
@@ -64,6 +65,7 @@ The `prun` utility included in the above job script is a wrapper script for laun
 SLURM batch submission scripts are just shell scripts - you can customize the script to perform various pre and post-processing tasks in addition to launching parallel jobs.
 ```
 
+(interactive-jobs)=
 ## Interactive usage
 In addition to running batch jobs, you may also request an interactive session on one or more compute nodes.  This is convenient for longer compilations or when undertaking debugging and testing tasks where it is convenient to have access to an interactive shell.  To submit interactive jobs, the `salloc` command is used and the example below illustrates an interactive session submitted to the devel queue:
 

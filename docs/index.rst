@@ -21,6 +21,7 @@ discussion category on the companion AI & HPC Cluster `GitHub site
 
    introduction
    hardware
+   quickstart
    access
    jobs
    software
