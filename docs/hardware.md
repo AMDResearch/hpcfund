@@ -31,6 +31,7 @@ Each bare-metal compute server consists of two [AMD EPYC&trade;](https://www.amd
 | [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (1&nbsp;GPU/node)  | 81.7 TFLOPs |  192GB |  5.3 TB/s | EPYC 9684X 16-Core (VM)  | 256 GB (VM) |
 | [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  192GB |  5.3 TB/s | 2 X EPYC 9684X 96-Core  | 2.3 TB |
 | [AMD MI325X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi325x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  256GB |  6.0 TB/s | 2 X EPYC 9755 128-Core  | 3 TB |
+| [AMD MI350X](https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html) <br> (8&nbsp;GPUs/node) | 72.1 TFLOPs |  288GB |  8.0 TB/s | 2 X EPYC 9755 128-Core  | 3 TB |
 ```
 
 Note that each AMD MI250 accelerator provides two Graphics Compute Dies (GCDs) for which the programmer can use as two separate GPUs.
