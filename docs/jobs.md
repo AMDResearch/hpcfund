@@ -9,13 +9,14 @@ Multiple partitions (or queues) are available for users to choose from and each 
 :name: table-queues
 | Queue     | Max Time | Max Node(s) | Charge Multiplier   |                Configuration                     |
 | --------- | -------- | ----------- | -----------------   | ------------------------------------------------ |
-| `devel`   | 30 min.  |      1      | {{devel_weight}}X   | Targeting short development needs (1xMI210).     |
+| `devel`   | 30 minutes  |      1      | {{devel_weight}}X   | Targeting short development needs (1xMI210).     |
 | `mi2101x` | 12 hours |      1      | {{mi2101x_weight}}X | 1 x MI210 accelerator per node.                  |
 | `mi2104x` | 24 hours |     16      | {{mi2104x_weight}}X | 4 x MI210 accelerators per node.                 |
 | `mi2508x` | 12 hours |     10      | {{mi2508x_weight}}X | 4 x MI250 accelerators (8 GPUs) per node.        |
 | `mi3001x` | 4 hours  |     1       | {{mi3001x_weight}}X | 1 x MI300X accelerator per node.                 |
 | `mi3008x` | 12 hours (batch) <br> 4&nbsp;hours&nbsp;(interactive) |     1       | {{mi3008x_weight}}X | 8 x MI300X accelerators per node.                |
 | `mi3258x` | 12 hours (batch) <br> 4&nbsp;hours&nbsp;(interactive) |     1       | {{mi3258x_weight}}X | 8 x MI325X accelerators per node.                |
+| `mi3501x` | 4 hours  |     1       | {{mi3501x_weight}}X | 1 x MI350X accelerator per node.   
 | `mi3508x` | 12 hours (batch) <br> 4&nbsp;hours&nbsp;(interactive) |     1       | {{mi3508x_weight}}X | 8 x MI350X accelerators per node.                |
 ```
 
