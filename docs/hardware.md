@@ -25,14 +25,14 @@ Each bare-metal compute server consists of two [AMD EPYC&trade;](https://www.amd
   ```{table} Table 1:  Hardware Overview of Available Node Types
 | Accelerator       | Peak FP64 | HBM<br> Capacity | HBM <br> Peak B/W |             Host CPU                 | Host<br>Memory |
 | --------- | :------: | :---------: | :---------------: | :--------: | :---: |
-| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (1&nbsp;GPU/node) | 45.3 TFLOPs  |   64GB |   1.6 TB/s | EPYC 7V13 16-core (VM) | 64 GB (VM) |
-| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (4&nbsp;GPUs/node)  | 45.3 TFLOPs  |   64GB |   1.6 TB/s | 2 X EPYC 7V13 64-core | 512 GB |
+| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (1&nbsp;GPU/node) | 45.3 TFLOPs  |   64GB |   1.6 TB/s | EPYC 7V13<br>16-core (VM) | 64 GB (VM) |
+| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (4&nbsp;GPUs/node)  | 45.3 TFLOPs  |   64GB |   1.6 TB/s | 2 X EPYC 7V13<br> 64-core | 512 GB |
 | [AMD MI250](https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html) <br> (8&nbsp;GCDs/node)  |  45.3 TFLOPs (per GCD) |  64GB (per GCD) |   1.6 TB/s (per GCD) | 2 X EPYC 7763 64-Core | 1.5 TB |
-| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (1&nbsp;GPU/node)  | 81.7 TFLOPs |  192GB |  5.3 TB/s | EPYC 9684X 16-Core (VM)  | 256 GB (VM) |
-| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  192GB |  5.3 TB/s | 2 X EPYC 9684X 96-Core  | 2.3 TB |
-| [AMD MI325X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi325x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  256GB |  6.0 TB/s | 2 X EPYC 9755 128-Core  | 3 TB |
-| [AMD MI350X](https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html) <br> (1&nbsp;GPU/node)  | 72.1 TFLOPs |  288GB |  8.0 TB/s | EPYC 9755 24-Core (VM)  | 352 GB (VM) |
-| [AMD MI350X](https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html) <br> (8&nbsp;GPUs/node) | 72.1 TFLOPs |  288GB |  8.0 TB/s | 2 X EPYC 9755 128-Core  | 3 TB |
+| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (1&nbsp;GPU/node)  | 81.7 TFLOPs |  192GB |  5.3 TB/s | EPYC 9684X<br>16-Core (VM)  | 256 GB (VM) |
+| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  192GB |  5.3 TB/s | 2 X EPYC 9684X<br>96-Core  | 2.3 TB |
+| [AMD MI325X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi325x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  256GB |  6.0 TB/s | 2 X EPYC 9755<br>128-Core  | 3 TB |
+| [AMD MI350X](https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html) <br> (1&nbsp;GPU/node)  | 72.1 TFLOPs |  288GB |  8.0 TB/s | EPYC 9755<br>24-Core (VM)  | 352 GB (VM) |
+| [AMD MI350X](https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html) <br> (8&nbsp;GPUs/node) | 72.1 TFLOPs |  288GB |  8.0 TB/s | 2 X EPYC 9755<br>128-Core  | 3 TB |
 ```
 
 Note that each AMD MI250 accelerator provides two Graphics Compute Dies (GCDs) for which the programmer can use as two separate GPUs.
