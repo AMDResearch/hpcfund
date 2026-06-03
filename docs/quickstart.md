@@ -31,10 +31,6 @@ For comprehensive documentation, please explore the full site.
 | 8     | 16 cores of EPYC 9684X        | [1x] MI300X 192 GB   | 238 GB DDR5    |
 | 28    | 16 cores of EPYC 7V13         | [1x] MI210 64 GB     | 64 GB DDR4     |
 
-```{note}
-**MI350X** will be deployed starting in Q2 2026. The `mi3508x` and `mi3501x` partitions will have charge factors of 1.4 and 0.175, respectively.
-```
-
 ### Login Node
 
 | Nodes | CPUs                          | GPUs                 | DRAM           |
