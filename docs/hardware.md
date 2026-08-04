@@ -1,11 +1,16 @@
 # System Overview
 
-The AUP AI & HPC Cluster consists of 40 high performance computing (HPC) servers attached to a unifying high-speed InfiniBand fabric supporting high-bandwidth, low-latency message passing for distributed-memory applications.  Each servers consists of dual-socket CPUs combined with multiple AMD Instinct MI series [accelerators](https://www.amd.com/en/products/accelerators/instinct.html).  The supporting operating system is [Rocky Linux](https://rockylinux.org). Additional details regarding the hardware configuration is summarized below.
+The AUP AI & HPC Cluster consists of 40 high performance computing (HPC) servers supporting high-bandwidth, low-latency message passing for distributed-memory applications.  Each server consists of dual-socket CPUs combined with multiple AMD Instinct MI series [accelerators](https://www.amd.com/en/products/accelerators/instinct.html).  The supporting operating system is [Rocky Linux](https://rockylinux.org). Depending on the server group, inter-node communication is provided by one of two high-speed network fabrics:
+
+* **InfiniBand (IB):** [ConnectX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 host channel adapters providing 200 Gb/s per port
+* **RoCE (RDMA over Converged Ethernet):** [Broadcom Thor2 BCM957608](https://docs.broadcom.com/doc/957608-DS1XX) host channel adapters providing 400 Gb/s per port
+
+Additional details regarding the hardware configuration is summarized below.
 
 (compute-servers)=
 ## Compute servers
 
-Each bare-metal compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/products/processors/server/epyc.html) processors with access to 512 GB (or more) of main memory. High-speed user network connectivity for inter-node communication is accommodated by a [ConnextX-6](https://nvdam.widen.net/s/5j7xtzqfxd/connectx-6-infiniband-datasheet-1987500-r2) MT28908 Infiniband host channel adapter providing a maximum port speed of 200 Gb/s.   For accelerated analysis, each node also includes one or more [AMD Instinct&trade;](https://www.amd.com/en/products/accelerators/instinct.html) accelerators. Multiple generations of accelerators are available within the system with key characteristics highlighted as follows:
+Each bare-metal compute server consists of two [AMD EPYC&trade;](https://www.amd.com/en/products/processors/server/epyc.html) processors with access to 512 GB (or more) of main memory.  For accelerated analysis, each node also includes one or more [AMD Instinct&trade;](https://www.amd.com/en/products/accelerators/instinct.html) accelerators. Multiple generations of accelerators are available within the system with key characteristics highlighted as follows:
 <!-- * [AMD MI100 Accelerator](https://www.amd.com/en/products/accelerators/instinct/mi100.html) 
   * Peak double-precision (FP64) performance of 11.5 TFLOPs
   * 32 GB of high bandwidth memory (HBM2e)
@@ -22,17 +27,17 @@ Each bare-metal compute server consists of two [AMD EPYC&trade;](https://www.amd
   * Peak GPU memory bandwidth 1.6 TB/s (per GCD)
   * Form factor: OAM Module -->
 
-  ```{table} Table 1:  Hardware Overview of Available Node Types
-| Accelerator       | Peak FP64 | HBM<br> Capacity | HBM <br> Peak B/W |             Host CPU                 | Host<br>Memory |
-| --------- | :------: | :---------: | :---------------: | :--------: | :---: |
-| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (1&nbsp;GPU/node) | 45.3 TFLOPs  |   64GB |   1.6 TB/s | EPYC 7V13<br>16-core (VM) | 64 GB (VM) |
-| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (4&nbsp;GPUs/node)  | 45.3 TFLOPs  |   64GB |   1.6 TB/s | 2 X EPYC 7V13<br> 64-core | 512 GB |
-| [AMD MI250](https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html) <br> (8&nbsp;GCDs/node)  |  45.3 TFLOPs (per GCD) |  64GB (per GCD) |   1.6 TB/s (per GCD) | 2 X EPYC 7763 64-Core | 1.5 TB |
-| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (1&nbsp;GPU/node)  | 81.7 TFLOPs |  192GB |  5.3 TB/s | EPYC 9684X<br>16-Core (VM)  | 256 GB (VM) |
-| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  192GB |  5.3 TB/s | 2 X EPYC 9684X<br>96-Core  | 2.3 TB |
-| [AMD MI325X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi325x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  256GB |  6.0 TB/s | 2 X EPYC 9755<br>128-Core  | 3 TB |
-| [AMD MI350X](https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html) <br> (1&nbsp;GPU/node)  | 72.1 TFLOPs |  288GB |  8.0 TB/s | EPYC 9755<br>24-Core (VM)  | 352 GB (VM) |
-| [AMD MI350X](https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html) <br> (8&nbsp;GPUs/node) | 72.1 TFLOPs |  288GB |  8.0 TB/s | 2 X EPYC 9755<br>128-Core  | 3 TB |
+  ```{table} Table 1:  Hardware Overview of Available Node Types and Network Connectivity
+| Accelerator       | Peak FP64 | HBM<br> Capacity | HBM <br> Peak B/W |             Host CPU                 | Host<br>Memory | Network |
+| --------- | :------: | :---------: | :---------------: | :--------: | :---: | :---: |
+| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (1&nbsp;GPU/node) | 45.3 TFLOPs  |   64GB |   1.6 TB/s | EPYC 7V13<br>16-core (VM) | 64 GB (VM) | 1x IB 200G |
+| [AMD MI210](https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html) <br> (4&nbsp;GPUs/node)  | 45.3 TFLOPs  |   64GB |   1.6 TB/s | 2 X EPYC 7V13<br> 64-core | 512 GB | 1x IB 200G |
+| [AMD MI250](https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html) <br> (8&nbsp;GCDs/node)  |  45.3 TFLOPs (per GCD) |  64GB (per GCD) |   1.6 TB/s (per GCD) | 2 X EPYC 7763 64-Core | 1.5 TB | 1x IB 200G |
+| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (1&nbsp;GPU/node)  | 81.7 TFLOPs |  192GB |  5.3 TB/s | EPYC 9684X<br>16-Core (VM)  | 256 GB (VM) | 1x IB 200G |
+| [AMD MI300X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  192GB |  5.3 TB/s | 2 X EPYC 9684X<br>96-Core  | 2.3 TB | 1x IB 200G |
+| [AMD MI325X](https://www.amd.com/en/products/accelerators/instinct/mi300/mi325x.html) <br> (8&nbsp;GPUs/node) | 81.7 TFLOPs |  256GB |  6.0 TB/s | 2 X EPYC 9755<br>128-Core  | 3 TB | 1x IB 200G |
+| [AMD MI350X](https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html) <br> (1&nbsp;GPU/node)  | 72.1 TFLOPs |  288GB |  8.0 TB/s | EPYC 9755<br>24-Core (VM)  | 352 GB (VM) | 1x IB 200G |
+| [AMD MI350X](https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html) <br> (8&nbsp;GPUs/node) | 72.1 TFLOPs |  288GB |  8.0 TB/s | 2 X EPYC 9755<br>128-Core  | 3 TB | 8x&nbsp;RoCE&nbsp;400G |
 ```
 
 Note that each AMD MI250 accelerator provides two Graphics Compute Dies (GCDs) for which the programmer can use as two separate GPUs.
