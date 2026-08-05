@@ -7,17 +7,17 @@ Multiple partitions (or queues) are available for users to choose from and each 
 
 ```{table} Table 1: Available SLURM queues
 :name: table-queues
-| Queue     | Max Time | Max Node(s) | Charge Multiplier   |                Configuration                     |
-| --------- | -------- | ----------- | -----------------   | ------------------------------------------------ |
-| `devel`   | 30 minutes  |      1      | {{devel_weight}}X   | Targeting short development needs (1xMI210).     |
-| `mi2101x` | 12 hours |      1      | {{mi2101x_weight}}X | 1 x MI210 accelerator per node.                  |
-| `mi2104x` | 24 hours |     16      | {{mi2104x_weight}}X | 4 x MI210 accelerators per node.                 |
-| `mi2508x` | 12 hours |     10      | {{mi2508x_weight}}X | 4 x MI250 accelerators (8 GPUs) per node.        |
-| `mi3001x` | 4 hours  |     1       | {{mi3001x_weight}}X | 1 x MI300X accelerator per node.                 |
-| `mi3008x` | 12 hours (batch) <br> 4&nbsp;hours&nbsp;(interactive) |     1       | {{mi3008x_weight}}X | 8 x MI300X accelerators per node.                |
-| `mi3258x` | 12 hours (batch) <br> 4&nbsp;hours&nbsp;(interactive) |     1       | {{mi3258x_weight}}X | 8 x MI325X accelerators per node.                |
-| `mi3501x` | 4 hours  |     1       | {{mi3501x_weight}}X | 1 x MI350X accelerator per node.   
-| `mi3508x` | 12 hours (batch) <br> 4&nbsp;hours&nbsp;(interactive) |     1       | {{mi3508x_weight}}X | 8 x MI350X accelerators per node.                |
+| Queue     | Max Time | Max Node(s) | Charge Multiplier   |                Configuration                     | Network |
+| --------- | -------- | ----------- | -----------------   | ------------------------------------------------ | :---: |
+| `devel`   | 30 minutes  |      1      | {{devel_weight}}X   | Targeting short development needs (1xMI210).     | 1x&nbsp;IB&nbsp;200G |
+| `mi2101x` | 12 hours |      1      | {{mi2101x_weight}}X | 1 x MI210 accelerator per node.                  | 1x&nbsp;IB&nbsp;200G |
+| `mi2104x` | 24 hours |     16      | {{mi2104x_weight}}X | 4 x MI210 accelerators per node.                 | 1x&nbsp;IB&nbsp;200G |
+| `mi2508x` | 12 hours |     10      | {{mi2508x_weight}}X | 4 x MI250 accelerators (8 GPUs) per node.        | 1x&nbsp;IB&nbsp;200G |
+| `mi3001x` | 4 hours  |     1       | {{mi3001x_weight}}X | 1 x MI300X accelerator per node.                 | 1x&nbsp;IB&nbsp;200G |
+| `mi3008x` | 12 hours (batch) <br> 4&nbsp;hours&nbsp;(interactive) |     1       | {{mi3008x_weight}}X | 8 x MI300X accelerators per node.                | 1x&nbsp;IB&nbsp;200G |
+| `mi3258x` | 12 hours (batch) <br> 4&nbsp;hours&nbsp;(interactive) |     1       | {{mi3258x_weight}}X | 8 x MI325X accelerators per node.                | 1x&nbsp;IB&nbsp;200G |
+| `mi3501x` | 4 hours  |     1       | {{mi3501x_weight}}X | 1 x MI350X accelerator per node.                 | 1x&nbsp;IB&nbsp;200G |
+| `mi3508x` | 12 hours (batch) <br> 4&nbsp;hours&nbsp;(interactive) |     4       | {{mi3508x_weight}}X | 8 x MI350X accelerators per node.                | 8x&nbsp;RoCE&nbsp;400G |
 ```
 
 Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis. You must have an active accounting allocation in order to submit jobs and the resource manager will track the combined number of **node** hours consumed by each job and deduct the [total node hours]*[charge multiplier] from your available balance.
