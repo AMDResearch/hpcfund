@@ -181,7 +181,7 @@ output.1514.3.log:pciBusID:                         163
 
 The table below highlights several of the more common user-facing SLURM commands. Consult the man pages (e.g. `man sbatch`) for more detailed information and command-line options for these utilities.
 
-```{table} Table 2: Common SLURM commands
+```{table} Table 3: Common SLURM commands
 | Command | Purpose |
 | ------- | ------- |
 | sbatch  | submit a job for later execution |
@@ -199,7 +199,7 @@ Unlike other partitions which use InfiniBand, the `mi3508x` partition is equippe
 
 Each node has 8 RoCE network interfaces named `bnxt_re0` through `bnxt_re7` (one per GPU). The following Table highlights relevant environment variables for configuring RoCE network communication between GPUs using RCCL:
 
-```{table} Table 3: RCCL environment variables for RoCE
+```{table} Table 4: RCCL environment variables for RoCE
 | Variable | Value | Purpose |
 | -------- | ----- | ------- |
 | `NCCL_IB_HCA` | `bnxt_re0,bnxt_re1,bnxt_re2,bnxt_re3,bnxt_re4,bnxt_re5,bnxt_re6,bnxt_re7` | Specifies the RDMA network devices to use for GPU communication |
@@ -230,7 +230,7 @@ export NCCL_SOCKET_IFNAME=eth0
 # load rccl-tests module
 module load rccl-tests
 
-srun all_reduce_perf -b 8 -e 2G -f 2 -g 1
+srun all_reduce_perf -b 8 -e 1G -f 2 -g 1
 ```
 
 This script launches an `all_reduce_perf` benchmark that sweeps message sizes from 8 bytes to 1 GB (doubling at each step), using 1 GPU per task across 2 nodes.
