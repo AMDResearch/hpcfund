@@ -22,6 +22,9 @@ Multiple partitions (or queues) are available for users to choose from and each 
 
 Note that special requests that extend beyond the above queue limits may potentially be accommodated on a case-by-case basis. You must have an active accounting allocation in order to submit jobs and the resource manager will track the combined number of **node** hours consumed by each job and deduct the [total node hours]*[charge multiplier] from your available balance.
 
+```{note}
+The `mi3508x` partition uses RoCE networking rather than InfiniBand. Multi-node jobs on this partition require additional environment variable configuration — see [Multi-node RoCE Networking](roce-networking) for details.
+```
 
 ## Offload Architecture Options
 
@@ -188,6 +191,47 @@ The table below highlights several of the more common user-facing SLURM commands
 | squeue  | report the state of queue jobs |
 | scontrol | view or modify a job configuration |
 ```
+
+(roce-networking)=
+## Multi-node RoCE Networking
+
+Unlike other partitions which use InfiniBand, the `mi3508x` partition is equipped with 8x [RoCE](https://en.wikipedia.org/wiki/RDMA_over_Converged_Ethernet) 400G NICs per node. When running multi-GPU or multi-node workloads on this partition, users must configure the appropriate [RCCL](https://rocm.docs.amd.com/projects/rccl/en/latest/index.html) environment variables to ensure proper use of the RoCE network devices.
+
+Each node has 8 RoCE network interfaces named `bnxt_re0` through `bnxt_re7` (one per GPU). The following Table highlights relevant environment variables for configuring RoCE network communication between GPUs using RCCL:
+
+```{table} Table 3: RCCL environment variables for RoCE
+| Variable | Value | Purpose |
+| -------- | ----- | ------- |
+| `NCCL_IB_HCA` | `bnxt_re0,bnxt_re1,bnxt_re2,bnxt_re3,bnxt_re4,bnxt_re5,bnxt_re6,bnxt_re7` | Specifies the RDMA network devices to use for GPU communication |
+| `NCCL_NET_GDR_LEVEL` | `5` | Enables GPU Direct RDMA for direct GPU-to-NIC data transfers |
+| `NCCL_IB_GID_INDEX` | `3` | Selects the correct RoCEv2 GID index |
+| `NCCL_SOCKET_IFNAME` | `eth0` | Sets the network interface for out-of-band control traffic |
+```
+
+Below is an example job script that runs `all_reduce_perf` from a pre-built version of the [RCCL-test](https://github.com/ROCm/rocm-systems/tree/develop/projects/rccl-tests) benchmark across 2 nodes (16 GPUs total) on the `mi3508x` partition:
+
+```{code-block} bash
+#!/bin/bash
+
+#SBATCH -J rccl               # Job name
+#SBATCH -o rccl.%j.out        # Name of stdout output file (%j expands to jobId)
+#SBATCH -N 2                  # Total number of nodes requested
+#SBATCH -n 16                 # Total number of tasks requested
+#SBATCH -t 00:30:00           # Run time (hh:mm:ss) - 30 minutes
+#SBATCH -p mi3508x            # Desired partition
+
+export NCCL_IB_HCA=bnxt_re0,bnxt_re1,bnxt_re2,bnxt_re3,bnxt_re4,bnxt_re5,bnxt_re6,bnxt_re7
+export NCCL_NET_GDR_LEVEL=5
+export NCCL_IB_GID_INDEX=3
+export NCCL_SOCKET_IFNAME=eth0
+
+# load rccl-tests module
+module load rccl-tests
+
+srun all_reduce_perf -b 8 -e 2G -f 2 -g 1
+```
+
+This script launches an `all_reduce_perf` benchmark that sweeps message sizes from 8 bytes to 1 GB (doubling at each step), using 1 GPU per task across 2 nodes.
 
 (jupyter)=
 ## Jupyter
