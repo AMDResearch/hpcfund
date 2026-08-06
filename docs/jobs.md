@@ -208,6 +208,8 @@ Each node has 8 RoCE network interfaces named `bnxt_re0` through `bnxt_re7` (one
 | `NCCL_SOCKET_IFNAME` | `eth0` | Sets the network interface for out-of-band control traffic |
 ```
 
+### RCCL-test
+
 Below is an example job script that runs `all_reduce_perf` from a pre-built version of the [RCCL-test](https://github.com/ROCm/rocm-systems/tree/develop/projects/rccl-tests) benchmark across 2 nodes (16 GPUs total) on the `mi3508x` partition:
 
 ```{code-block} bash
@@ -232,6 +234,67 @@ srun all_reduce_perf -b 8 -e 2G -f 2 -g 1
 ```
 
 This script launches an `all_reduce_perf` benchmark that sweeps message sizes from 8 bytes to 1 GB (doubling at each step), using 1 GPU per task across 2 nodes.
+
+### PyTorch Distributed
+
+Since [PyTorch](https://pytorch.org/) also uses RCCL as its distributed communication backend on AMD GPUs, the same RoCE environment variables apply when running multi-node PyTorch workloads. The following example uses `torchrun` to launch a simple `all_reduce` benchmark across 2 nodes (16 GPUs total):
+
+```{code-block} bash
+#!/bin/bash
+
+#SBATCH -J pytorch-bench        # Job name
+#SBATCH -o pytorch-bench.%j.out # Name of stdout output file (%j expands to jobId)
+#SBATCH -N 2                    # Total number of nodes requested
+#SBATCH --ntasks-per-node=1     # One task per node, torchrun will spawn additional
+#SBATCH -t 00:30:00             # Run time (hh:mm:ss) - 30 minutes
+#SBATCH -p mi3508x              # Desired partition
+
+module load pytorch/2.10.0
+
+export NCCL_IB_HCA=bnxt_re0,bnxt_re1,bnxt_re2,bnxt_re3,bnxt_re4,bnxt_re5,bnxt_re6,bnxt_re7
+export NCCL_NET_GDR_LEVEL=5
+export NCCL_IB_GID_INDEX=3
+export NCCL_SOCKET_IFNAME=eth0
+export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
+export MASTER_PORT=29500
+export OMP_NUM_THREADS=1
+
+srun torchrun \
+    --nnodes=$SLURM_JOB_NUM_NODES \
+    --nproc_per_node=8 \
+    --rdzv_id=$SLURM_JOB_ID \
+    --rdzv_backend=c10d \
+    --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT \
+    allreduce_bench.py
+```
+
+The `allreduce_bench.py` script referenced above performs a simple sweep of `all_reduce` operations across a range of message sizes:
+
+```{code-block} python
+import torch
+import torch.distributed as dist
+import os
+
+dist.init_process_group(backend="nccl")
+local_rank = int(os.environ["LOCAL_RANK"])
+torch.cuda.set_device(local_rank)
+
+for size in [2**n for n in range(20, 31)]:  # 1MB to 1GB
+    tensor = torch.ones(size // 4, device="cuda")
+    torch.cuda.synchronize()
+    start = torch.cuda.Event(enable_timing=True)
+    end = torch.cuda.Event(enable_timing=True)
+    start.record()
+    dist.all_reduce(tensor)
+    end.record()
+    torch.cuda.synchronize()
+    if dist.get_rank() == 0:
+        elapsed = start.elapsed_time(end) / 1000
+        bw = (tensor.nbytes / 1e9) / elapsed
+        print(f"Size: {tensor.nbytes/1e6:.0f} MB  BW: {bw:.2f} GB/s")
+
+dist.destroy_process_group()
+```
 
 (jupyter)=
 ## Jupyter
