@@ -9,9 +9,9 @@ The primary avenue for obtaining system help is via the community [GitHub site](
 In addition to this user guide, links to other sites are provided below with additional information that may be of interest.
 
 ### HIP Programming
-* [HIP Programming Guide](https://docs.amd.com/bundle/HIP-Programming-Guide-v5.4/page/Introduction_to_HIP_Programming_Guide.html)
-* [HIP API Guide](https://docs.amd.com/bundle/HIP-API-Guide-v5.4/page/index.html)
-* [ROCm Compiler Reference](https://docs.amd.com/bundle/ROCm-Compiler-Reference-Guide-v5.4.2/page/Introduction_to_Compiler_Reference_Guide.html)
+* [HIP Documentation](https://rocm.docs.amd.com/projects/HIP/en/latest/index.html)
+* [HIP Runtime API Reference](https://rocm.docs.amd.com/projects/HIP/en/latest/reference/hip_runtime_api_reference.html)
+* [ROCm Compiler Reference](https://rocm.docs.amd.com/projects/llvm-project/en/latest/reference/rocmcc.html)
 
 ### System tools
 * [Lmod User Guide](https://lmod.readthedocs.io/en/latest/010_user.html)
