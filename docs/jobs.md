@@ -42,7 +42,8 @@ mi3001x        | MI300 x 1 | `--offload-arch=gfx942`
 mi3008x        | MI300 x 8 | `--offload-arch=gfx942`
 mi3008x_long   | MI300 x 8 | `--offload-arch=gfx942`
 mi3258x        | MI325 x 8 | `--offload-arch=gfx942`
-mi3508x        | MI325 x 8 | `--offload-arch=gfx950`
+mi3501x        | MI350 x 1 | `--offload-arch=gfx950`
+mi3508x        | MI350 x 8 | `--offload-arch=gfx950`
 ```
 
 (batch-jobs)=
